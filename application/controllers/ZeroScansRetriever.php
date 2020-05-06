@@ -10,7 +10,6 @@
             $this->load->model('chapterDao');
             $this->load->model('chapterImageDao');
             $this->load->library('Commonutils');
-            $this->load->library('Googleservice');
         }
 
         public function manga_get($mangaId) {
@@ -33,7 +32,8 @@
                     
                     $number = $chapter->parent()->parent()->find('span', 0);
                     // log_message('info', 'Chapter Number: '. $number->innertext);
-                    $chapterExist = $this->chapterDao->countMangaChapter($mangaId, trim($number->innertext));
+                    $chapterNumber = trim($number->innertext);
+                    $chapterExist = $this->chapterDao->countMangaChapter($mangaId, $chapterNumber);
                     // log_message('info', 'chapterExist '.$chapterExist);
 
                     if($chapterExist == 0) {
@@ -46,12 +46,10 @@
                         // log_message('info', 'Url: '. $chapter->href);
                         $chapterDb['source_chapter_url'] = $chapter->href;
         
-                        $chapterDb['number'] = trim($number->innertext);
-                        $folderId = $this->googleservice->createSubFolder($selectedManga['drive_folder_id'], trim($number->innertext));
-                        $chapterDb['drive_folder_id'] = $folderId;
+                        $chapterDb['number'] = $chapterNumber;
                         $chapterId = $this->chapterDao->save($chapterDb);
     
-                        $this->fetchChapterImage($chapterId, $chapter->href);
+                        $this->fetchChapterImage($chapterId, $chapter->href, 'images/'.$selectedManga['title'].'/'.$chapterNumber);
                         break;
                     }
 
@@ -63,7 +61,7 @@
             $this->response(array('status' => 'OK', 'message' => 'Success'));
         }
 
-        private function fetchChapterImage($chapterId, $sourceUrl) {
+        private function fetchChapterImage($chapterId, $sourceUrl, $folder) {
             $html = file_get_html($sourceUrl);
             $content = $html->find('div[id=content]', 0);
             $container = $content->first_child();
@@ -81,11 +79,11 @@
                         $content = $this->commonutils->curl_get_contents($imgUrl);
                         $mimeType = $this->commonutils->getMimeTypes($imgUrl);
                         $filename = basename(parse_url($imgUrl, PHP_URL_PATH));
-                        $fileId = $this->googleservice->upload($content, $filename, $mimeType);
+                        $this->commonutils->downloadImage($folder, $filename, $imgUrl);
                         array_push($dataDB, array(
                             'chapter_id' => $chapterId ,
                             'image_url' => $imgUrl ,
-                            'drive_file_id' => $fileId 
+                            'drive_file_id' => $folder.'/'.$filename
                             //'image_base64' => $this->commonutils->imageUrlToBase64(ZEROSCANS_IMAGE_BASE_URL.$imgUrl)
                             )
                         );

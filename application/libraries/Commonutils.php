@@ -3,13 +3,13 @@
 
     class Commonutils {
 
-        public static function startsWith ($string, $startString) 
+        public function startsWith ($string, $startString) 
         { 
             $len = strlen($startString); 
             return (substr($string, 0, $len) === $startString); 
         } 
         
-        public static function endsWith($string, $endString) 
+        public function endsWith($string, $endString) 
         { 
             $len = strlen($endString); 
             if ($len == 0) { 
@@ -18,7 +18,7 @@
             return (substr($string, -$len) === $endString); 
         } 
 
-        public static function curl_get_contents($url)
+        public function curl_get_contents($url)
         {
             $ch = curl_init();
 
@@ -32,7 +32,27 @@
             return $data;
         }
 
-        public static function getMimeTypes($url){
+        public function downloadImage($folder, $filename, $url){
+            if (!file_exists($folder)) {
+                mkdir($folder, 0777, true);
+            }
+
+            //ini_set('allow_url_fopen', 'true');
+            if (ini_get('allow_url_fopen')) {
+                file_put_contents($folder.'/'.$filename, file_get_contents($url));
+
+            } else {
+                $ch = curl_init($url);
+                $fp = fopen($folder.'/'.$filename, 'wb');
+                curl_setopt($ch, CURLOPT_FILE, $fp);
+                curl_setopt($ch, CURLOPT_HEADER, 0);
+                curl_exec($ch);
+                curl_close($ch);
+                fclose($fp);
+            }
+        }
+
+        public function getMimeTypes($url){
             $mime_types = array(
                 'pdf' => 'application/pdf',
                 'doc' => 'application/msword',
@@ -49,7 +69,7 @@
             return $mime_types[$ext];
         }
 
-        public static function imageUrlToBase64($url){
+        public function imageUrlToBase64($url){
             $ch = curl_init();
 
             curl_setopt($ch, CURLOPT_HEADER, 0);
