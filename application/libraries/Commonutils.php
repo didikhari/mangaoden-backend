@@ -32,20 +32,27 @@
             return $data;
         }
 
-        public function downloadImage($folder, $filename, $url){
+        public function downloadImage($folder, $filename, $url, $timeout){
             if (!file_exists($folder)) {
                 mkdir($folder, 0777, true);
             }
 
             //ini_set('allow_url_fopen', 'true');
             if (ini_get('allow_url_fopen')) {
-                file_put_contents($folder.'/'.$filename, file_get_contents($url));
+                $ctx = stream_context_create(array('http'=>
+                    array(
+                        'timeout' => $timeout,  //1200 Seconds is 20 Minutes
+                    )
+                ));
+                file_put_contents($folder.'/'.$filename, file_get_contents($url, false, $ctx));
 
             } else {
-                $ch = curl_init($url);
+                $ch = curl_init();
                 $fp = fopen($folder.'/'.$filename, 'wb');
                 curl_setopt($ch, CURLOPT_FILE, $fp);
                 curl_setopt($ch, CURLOPT_HEADER, 0);
+                curl_setopt($ch, CURLOPT_TIMEOUT, $timeout);
+                curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
                 curl_exec($ch);
                 curl_close($ch);
                 fclose($fp);
