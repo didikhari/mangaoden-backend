@@ -1,9 +1,10 @@
 <?php
     defined('BASEPATH') OR exit('No direct script access allowed');
 
-    class GoogleService {
+    class Googleservice {
 
         public function createSubFolder($parentFolderId, $folderName){
+            log_message('info', 'creating sub folder');
             $client = getClient();
             $service = new Google_Service_Drive($client);
             $fileMetadata = new Google_Service_Drive_DriveFile(array(
@@ -16,6 +17,7 @@
         }
 
         public function upload($content, $filename, $mimeType) {
+            log_message('info', 'uploading content');
             $client = getClient();
             $service = new Google_Service_Drive($client);
             $fileMetadata = new Google_Service_Drive_DriveFile(array(
@@ -34,6 +36,7 @@
          */
         private function getClient()
         {
+            log_message('info', 'creating client START');
             $client = new Google_Client();
             $client->setApplicationName('Google Drive API PHP Quickstart');
             $client->setScopes(Google_Service_Drive::DRIVE_METADATA_READONLY);
@@ -78,6 +81,7 @@
                 }
                 file_put_contents($tokenPath, json_encode($client->getAccessToken()));
             }
+            log_message('info', 'creating client DONE');
             return $client;
         }
         

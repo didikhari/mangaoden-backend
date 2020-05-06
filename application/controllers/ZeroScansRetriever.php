@@ -7,7 +7,7 @@
         public function __construct() {
             parent::__construct();
             $this->load->library('Commonutils');
-            $this->load->library('GoogleService');
+            $this->load->library('Googleservice');
             $this->load->model('mangaDao');
             $this->load->model('chapterDao');
             $this->load->model('chapterImageDao');
@@ -47,8 +47,8 @@
                         $chapterDb['source_chapter_url'] = $chapter->href;
         
                         $chapterDb['number'] = trim($number->innertext);
-
-                        $this->googleService->createSubFolder($selectedManga['drive_folder_id'], trim($number->innertext));
+                        $folderId = $this->googleservice->createSubFolder($selectedManga['drive_folder_id'], trim($number->innertext));
+                        $chapterDb['drive_folder_id'] = $folderId;
                         $chapterId = $this->chapterDao->save($chapterDb);
     
                         $this->fetchChapterImage($chapterId, $chapter->href);
@@ -81,7 +81,7 @@
                         $content = $this->commonutils->curl_get_contents($imgUrl);
                         $mimeType = $this->commonutils->getMimeTypes($imgUrl);
                         $filename = basename(parse_url($imgUrl, PHP_URL_PATH));
-                        $fileId = $this->googleService->upload($content, $filename, $mimeType);
+                        $fileId = $this->googleservice->upload($content, $filename, $mimeType);
                         array_push($dataDB, array(
                             'chapter_id' => $chapterId ,
                             'image_url' => $imgUrl ,
