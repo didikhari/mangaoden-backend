@@ -79,7 +79,7 @@
                         $content = $this->commonutils->curl_get_contents($imgUrl);
                         $mimeType = $this->commonutils->getMimeTypes($imgUrl);
                         $filename = basename(parse_url($imgUrl, PHP_URL_PATH));
-                        $this->commonutils->downloadImage($folder, $filename, $imgUrl);
+                        $this->commonutils->downloadImage($folder, $filename, ZEROSCANS_IMAGE_BASE_URL.$imgUrl);
                         array_push($dataDB, array(
                             'chapter_id' => $chapterId ,
                             'image_url' => $imgUrl ,
