@@ -1,0 +1,5 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/ljxisdfg/crawl.didikhari.web.id/
+    - /bin/cp -R /home/ljxisdfg/repositories/mangaoden-backend/ $DEPLOYPATH
