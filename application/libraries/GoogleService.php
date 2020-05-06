@@ -3,7 +3,7 @@
 
     class Googleservice {
 
-        public static function createSubFolder($parentFolderId, $folderName){
+        public function createSubFolder($parentFolderId, $folderName){
             log_message('info', 'creating sub folder');
             $client = getClient();
             $service = new Google_Service_Drive($client);
@@ -16,7 +16,7 @@
             return $folder->id;
         }
 
-        public static function upload($content, $filename, $mimeType) {
+        public function upload($content, $filename, $mimeType) {
             log_message('info', 'uploading content');
             $client = getClient();
             $service = new Google_Service_Drive($client);
@@ -34,7 +34,7 @@
          * Returns an authorized API client.
          * @return Google_Client the authorized client object
          */
-        private static function getClient()
+        private function getClient()
         {
             log_message('info', 'creating client START');
             $client = new Google_Client();
