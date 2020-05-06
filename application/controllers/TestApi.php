@@ -11,7 +11,6 @@
             $response['status']=200;
             $response['error']=false;
             $response['message']='Hai from response';
-
             $this->response($response);
         }
     }
