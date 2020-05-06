@@ -2,7 +2,6 @@
     defined('BASEPATH') OR exit('No direct script access allowed');
 
     class Googleservice {
-
         public function createSubFolder($parentFolderId, $folderName){
             log_message('info', 'creating sub folder');
             $client = getClient();
