@@ -6,11 +6,11 @@
         
         public function __construct() {
             parent::__construct();
-            $this->load->library('Commonutils');
-            $this->load->library('Googleservice');
             $this->load->model('mangaDao');
             $this->load->model('chapterDao');
             $this->load->model('chapterImageDao');
+            $this->load->library('Commonutils');
+            $this->load->library('Googleservice');
         }
 
         public function manga_get($mangaId) {
