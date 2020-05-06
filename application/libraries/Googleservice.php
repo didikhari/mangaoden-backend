@@ -4,7 +4,7 @@
     class Googleservice {
         public function createSubFolder($parentFolderId, $folderName){
             log_message('info', 'creating sub folder');
-            $client = getClient();
+            $client = $this->getClient();
             $service = new Google_Service_Drive($client);
             $fileMetadata = new Google_Service_Drive_DriveFile(array(
                 'name' => $folderName,
@@ -17,7 +17,7 @@
 
         public function upload($content, $filename, $mimeType) {
             log_message('info', 'uploading content');
-            $client = getClient();
+            $client = $this->getClient();
             $service = new Google_Service_Drive($client);
             $fileMetadata = new Google_Service_Drive_DriveFile(array(
                 'name' => $filename));
