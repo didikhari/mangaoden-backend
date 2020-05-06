@@ -48,7 +48,7 @@
         
                         $chapterDb['number'] = trim($number->innertext);
 
-                        $this->GoogleService->createSubFolder($selectedManga['drive_folder_id'], trim($number->innertext));
+                        $this->googleService->createSubFolder($selectedManga['drive_folder_id'], trim($number->innertext));
                         $chapterId = $this->chapterDao->save($chapterDb);
     
                         $this->fetchChapterImage($chapterId, $chapter->href);
@@ -81,7 +81,7 @@
                         $content = $this->commonutils->curl_get_contents($imgUrl);
                         $mimeType = $this->commonutils->getMimeTypes($imgUrl);
                         $filename = basename(parse_url($imgUrl, PHP_URL_PATH));
-                        $fileId = $this->GoogleService->upload($content, $filename, $mimeType);
+                        $fileId = $this->googleService->upload($content, $filename, $mimeType);
                         array_push($dataDB, array(
                             'chapter_id' => $chapterId ,
                             'image_url' => $imgUrl ,
