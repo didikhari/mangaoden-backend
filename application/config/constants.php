@@ -91,3 +91,8 @@ defined('SOURCE_MANGAEDEN')    OR define('SOURCE_MANGAEDEN', '0');
 defined('ZEROSCANS_API_URL')    OR define('ZEROSCANS_API_URL', 'https://zeroscans.com/');
 defined('ZEROSCANS_IMAGE_BASE_URL')    OR define('ZEROSCANS_IMAGE_BASE_URL', 'https://zeroscans.com/');
 defined('SOURCE_ZEROSCANS')    OR define('SOURCE_ZEROSCANS', '1');
+
+
+defined('HATIGARMSCANZ_API_URL')    OR define('HATIGARMSCANZ_API_URL', 'https://hatigarmscanz.net/');
+defined('HATIGARMSCANZ_IMAGE_BASE_URL')    OR define('HATIGARMSCANZ_IMAGE_BASE_URL', 'https://hatigarmscanz.net/');
+defined('SOURCE_HATIGARMSCANZ')    OR define('SOURCE_HATIGARMSCANZ', '2');
