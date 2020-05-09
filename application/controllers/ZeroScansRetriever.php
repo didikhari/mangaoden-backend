@@ -49,7 +49,7 @@
                         $chapterDb['number'] = $chapterNumber;
                         $chapterId = $this->chapterDao->save($chapterDb);
     
-                        $this->fetchChapterImage($chapterId, $chapter->href, 'images/'.$selectedManga['title'].'/'.$chapterNumber);
+                        $this->fetchChapterImage($chapterId, $chapter->href, 'images/'.$selectedManga['drive_folder_id'].'/'.$chapterNumber);
                         break;
                     }
 
