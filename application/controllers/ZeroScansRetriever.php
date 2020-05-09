@@ -76,8 +76,8 @@
                     $dataDB = array();
                     foreach($dataImgJson as $imgUrl) {
                         // log_message('info', "Image URL: ".$imgUrl);
-                        $content = $this->commonutils->curl_get_contents($imgUrl);
-                        $mimeType = $this->commonutils->getMimeTypes($imgUrl);
+                        //$content = $this->commonutils->curl_get_contents($imgUrl);
+                        //$mimeType = $this->commonutils->getMimeTypes($imgUrl);
                         $filename = basename(parse_url($imgUrl, PHP_URL_PATH));
                         $this->commonutils->downloadImage($folder, $filename, ZEROSCANS_IMAGE_BASE_URL.$imgUrl, 300);
                         array_push($dataDB, array(
