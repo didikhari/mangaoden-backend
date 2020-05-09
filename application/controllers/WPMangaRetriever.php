@@ -94,7 +94,7 @@
                 $imgUrl = trim($content->{'data-src'});
                 //log_message('info', 'Url: '. $imgUrl);
                 $filename = basename(parse_url($imgUrl, PHP_URL_PATH));
-                //$this->commonutils->downloadImage($folder, $filename, $imgUrl, 300);
+                $this->commonutils->downloadImage($folder, $filename, $imgUrl, 300);
                 array_push($dataDB, array(
                     'chapter_id' => $chapterId ,
                     'image_url' => $imgUrl ,
