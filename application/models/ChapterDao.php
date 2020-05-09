@@ -46,5 +46,12 @@
             $this->db->from('chapter');
             return $this->db->count_all_results();
         }
+
+        public function countMangaChapterByTitle($mangaId, $title) {
+            $array = array('manga_id' => $mangaId, 'title' => $title);
+            $this->db->where($array);
+            $this->db->from('chapter');
+            return $this->db->count_all_results();
+        }
     }
 ?>

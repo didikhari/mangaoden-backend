@@ -96,3 +96,7 @@ defined('SOURCE_ZEROSCANS')    OR define('SOURCE_ZEROSCANS', '1');
 defined('HATIGARMSCANZ_API_URL')    OR define('HATIGARMSCANZ_API_URL', 'https://hatigarmscanz.net/');
 defined('HATIGARMSCANZ_IMAGE_BASE_URL')    OR define('HATIGARMSCANZ_IMAGE_BASE_URL', 'https://hatigarmscanz.net/');
 defined('SOURCE_HATIGARMSCANZ')    OR define('SOURCE_HATIGARMSCANZ', '2');
+
+defined('EARLYMANGA_API_URL')    OR define('EARLYMANGA_API_URL', 'https://earlymanga.net/');
+defined('EARLYMANGA_IMAGE_BASE_URL')    OR define('EARLYMANGA_IMAGE_BASE_URL', 'https://hatigarmscanz.net/');
+defined('SOURCE_EARLYMANGA')    OR define('SOURCE_EARLYMANGA', '3');
