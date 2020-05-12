@@ -61,6 +61,7 @@ $route['retriever/zeroscans/hero-i-quit-long-time-ago'] = 'ZeroScansRetriever/ma
 
 /* hatigarmscanz */
 $route['retriever/hatigarmscanz/tales-of-demons-and-gods'] = 'HatigarmscanzRetriever/manga/5';
+$route['retriever/hatigarmscanz/the-scholars-reincarnation'] = 'HatigarmscanzRetriever/manga/7';
 
 /* earlymanga */
 $route['retriever/earlymanga/master-of-legendary-realms'] = 'WPMangaRetriever/manga/6';
