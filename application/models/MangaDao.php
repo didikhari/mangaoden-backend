@@ -77,7 +77,7 @@
 
         public function getDetailManga($mangaId) {
             $query = $this->db->get_where('manga', array('id' => $mangaId));
-            return $query->result();
+            return $query->row_array();
         }
         
         public function updateManga($manga) {
