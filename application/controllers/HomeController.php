@@ -32,7 +32,7 @@
         }
 
         public function comics_get($orderBy){
-            $comicArray = $this->mangaDao->getListManga(1, 6, null, $orderBy, 'DESC');
+            $comicArray = $this->mangaDao->getListManga(0, 6, null, $orderBy, 'DESC');
             $images = array();
             foreach($comicArray as $comic){
                 $image = array(

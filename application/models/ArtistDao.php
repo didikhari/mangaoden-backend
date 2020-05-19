@@ -3,20 +3,14 @@
     
     class ArtistDao extends CI_Model{
         
-        public function save($name){
-            $array = array('name' => $name);
-            $this->db->where($array);
-            $query = $this->db->get('artist');
-            $row = $query->row_array();
-            if (!isset($row)) {
-                $newArtist = array(
-                    'name' => $name,
-                );
-                $this->db->insert('artist', $newArtist);
-                return $this->db->insert_id();
-            } else {
-                return $row['id'];
-            }
+        public function getByMangaId($mangaId) {
+            $this->db->select('name');
+            $this->db->from('artist');
+            $this->db->join('manga_artist', 'artist.id = manga_artist.artist_id');
+            $this->db->where('manga_artist.manga_id', $mangaId);
+            $this->db->order_by('artist.name', 'ASC');
+            $query = $this->db->get();
+            return $query->result();
         }
     }
 ?>

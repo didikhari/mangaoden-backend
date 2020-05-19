@@ -34,6 +34,13 @@
             return $query->result();
         }
         
+        public function getListChapter($start, $rowPerPage, $orderBy, $orderType, $mangaId) {
+            $this->db->order_by($orderBy, $orderType);
+            $this->db->limit($rowPerPage, $start);
+            $query = $this->db->get_where('chapter', array('manga_id' => $mangaId));
+            return $query->result();
+        }
+
         public function getByChapterId($chapterId){
             $this->db->order_by('id', 'ASC');
             $query = $this->db->get_where('chapter_image', array('chapter_id' => $chapterId));
