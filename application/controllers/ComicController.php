@@ -24,7 +24,7 @@
             foreach($listManga as $manga){
                 $mangaData = array(
                     "id" => $manga['id'],
-                    "cover" => $manga['image_url'],
+                    "cover" => $manga['cover_url'],
                     "title" => $manga['title'],
                     "last_chapter_date" => $manga['last_chapter_date'],
                     "status" => (int) $manga['status']
