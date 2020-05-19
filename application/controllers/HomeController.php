@@ -6,11 +6,33 @@
         public function __construct() {
             parent::__construct();
             $this->load->model('mangaDao');
-            $this->load->model('chapterDao');
+            $this->load->model('sliderImageDao');
         }
 
-        public function hot_get(){
-            $comicArray = $this->mangaDao->getListManga(1, 6, null, 'last_update_date', 'DESC');
+        public function slider_get(){
+            $comicArray = $this->sliderImageDao->findAll();
+            $images = array();
+            foreach($comicArray as $comic){
+                $image = array(
+                    'img' => $comic['image_url'],
+                    'title' => $comic['title'],
+                    'id' => $comic['manga_id']
+                );
+                array_push($images, $image);
+            }
+            $data = array(
+                'images' => $images
+            );
+
+            $this->response(array(
+                'status' => 'success', 
+                'message' => 'Success', 
+                'data' => $data)
+            );
+        }
+
+        public function comics_get($orderBy){
+            $comicArray = $this->mangaDao->getListManga(1, 6, null, $orderBy, 'DESC');
             $images = array();
             foreach($comicArray as $comic){
                 $image = array(
