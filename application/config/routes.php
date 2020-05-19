@@ -53,6 +53,9 @@ $route['default_controller'] = 'welcome';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
+/* api */
+$route['v1/api/home/hot'] = 'HomeController/hot';
+
 /* zeroscans */
 $route['retriever/zeroscans/star-martial-god-technique'] = 'ZeroScansRetriever/manga/1';
 $route['retriever/zeroscans/second-life-ranker'] = 'ZeroScansRetriever/manga/2';
