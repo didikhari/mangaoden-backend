@@ -11,7 +11,7 @@
         public function chapters_get($mangaId){
             $chaptersList = $this->chapterDao->getByMangaId($mangaId);
             $chapters = array();
-            foreach($chapterList as $chapter) {
+            foreach($chaptersList as $chapter) {
                 $tmp = array(
                     "id" => $chapter->id,
                     "number" => $chapter->number, 
