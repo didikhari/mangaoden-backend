@@ -13,7 +13,7 @@
             $chapters = array();
             foreach($chaptersList as $chapter) {
                 $tmp = array(
-                    "id" => $chapter->id,
+                    "id" => (int) $chapter->id,
                     "number" => $chapter->number, 
                     "title" => $chapter->title, 
                     "retrieve_date" => $chapter->retrieve_date, 
@@ -37,7 +37,7 @@
             $chapterImages = array();
             foreach($imageList as $chapterImage) {
                 $tmp = array(
-                    "id" => $chapter->id,
+                    "id" => (int) $chapter->id,
                     "image_url" => $chapter->image_url, 
                     "width" => $chapter->width, 
                     "height" => $chapter->height
