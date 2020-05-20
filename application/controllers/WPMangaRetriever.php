@@ -14,7 +14,7 @@
             $this->load->library('Commonutils');
         }
 
-        public function manga_get($mangaId) {
+        public function manga_get($mangaId, $dateFormatFlag) {
             $selectedManga = $this->mangaDao->getDetailManga($mangaId);
             $html = file_get_html($selectedManga['source_manga_url']);
             //$ratingPostId = $html->find('input[class=rating-post-id]', 0)->value;
@@ -60,12 +60,13 @@
                                 // log_message('info', 'Url: '. $chapter->href);
                                 $chapterDb['source_chapter_url'] = $chapterLink->href;
                                 if($chapterReleaseDate){
-                                    $chapterDb['release_date'] = trim($chapterReleaseDate);
+                                    $releaseDate = $this->commonutils->formatDate($chapterReleaseDate, $dateFormatFlag);
+                                    $chapterDb['release_date'] = $releaseDate;
                                 } else {
-                                    $chapterDb['release_date'] = date("Y/m/m H:i:sa");
+                                    $chapterDb['release_date'] = date("Y/m/d H:i:sa");
                                 }
                                 
-                                $chapterDb['number'] = $chapterNumber;
+                                $chapterDb['number'] = $this->commonutils->getChapterNoFromTitile($chapterNumber);
                                 $chapterId = $this->chapterDao->save($chapterDb);
             
                                 $this->fetchChapterImage($chapterId, $chapterLink->href, 'images/'.$selectedManga['drive_folder_id'].'/'.$chapterNumber);

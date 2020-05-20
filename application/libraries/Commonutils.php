@@ -110,5 +110,20 @@
         function IsNullOrEmptyString($str){
             return (!isset($str) || trim($str) === '');
         }
+
+        function formatDate($str, $flag) {
+            $dateFormats = array(
+                '1' => 'Y-m-d',
+                '2' => 'F d, Y',
+                '3' => 'm/d/Y'
+            );
+            $format = $dateFormats[$flag];
+            $myDateTime = DateTime::createFromFormat($format, trim($str));
+            echo $myDateTime->format('Y-m-d');
+        }
+
+        function getChapterNoFromTitile($title) {
+            return preg_replace('/[^0-9.]/','',$title);
+        }
     }
 ?>

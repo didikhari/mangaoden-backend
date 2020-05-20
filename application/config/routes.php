@@ -73,7 +73,7 @@ $route['retriever/hatigarmscanz/tales-of-demons-and-gods'] = 'HatigarmscanzRetri
 $route['retriever/hatigarmscanz/the-scholars-reincarnation'] = 'HatigarmscanzRetriever/manga/7';
 
 /* earlymanga */
-$route['retriever/earlymanga/master-of-legendary-realms'] = 'WPMangaRetriever/manga/6';
+$route['retriever/earlymanga/master-of-legendary-realms'] = 'WPMangaRetriever/manga/6/3';
 
 /* mangatx */
-$route['retriever/mangatx/the-demon-blades'] = 'WPMangaRetriever/manga/8';
+$route['retriever/mangatx/the-demon-blades'] = 'WPMangaRetriever/manga/8/2';
