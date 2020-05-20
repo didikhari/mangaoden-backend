@@ -61,7 +61,7 @@
                     "number" => $chapter->number, 
                     "release_date" => $chapter->release_date == null ? $chapter->retrieve_date : $chapter->release_date, 
                     "title" => $chapter->title, 
-                    "id" => $chapter->id
+                    "id" => (int) $chapter->id
                 );
                 array_push($chapters, $tmp);
             }
@@ -80,7 +80,7 @@
             foreach($artistList as $artist) {
                 array_push($artists, $artist->name);
             }
-            
+            $totalChapter = $this->chapterDao->countMangaChapterByMangaId($mangaId);
             $responseBody = array(
                 'id' => (int) $mangaDetail['id'],
                 'title' => $mangaDetail['title'],
@@ -88,7 +88,7 @@
                 'cover' => $mangaDetail['cover_url'],
                 'status' => (int) $mangaDetail['status'],
                 'last_chapter_date' => $mangaDetail['last_chapter_date'],
-                //'total_chapter' => (int) $mangaDetail['chapters_len'],
+                'total_chapter' => (int) $totalChapter,
                 'hits' => (int) $mangaDetail['hits'],
                 'is_licenced' => $mangaDetail['is_licenced'],
                 //'source' => $mangaDetail['source'],
