@@ -119,7 +119,7 @@
             );
             $format = $dateFormats[$flag];
             $myDateTime = DateTime::createFromFormat($format, trim($str));
-            echo $myDateTime->format('Y-m-d');
+            return $myDateTime->format('Y-m-d');
         }
 
         function getChapterNoFromTitile($title) {
