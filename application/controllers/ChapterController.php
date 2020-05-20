@@ -6,6 +6,9 @@
         public function __construct() {
             parent::__construct();
             $this->load->model('chapterDao');
+            $this->load->model('mangaDao');
+            $this->load->model('sourceDao');
+            $this->load->library('Commonutils');
         }
 
         public function chapters_get($mangaId){
@@ -32,13 +35,21 @@
             );
         }
 
-        public function chapterDetail_get($chapterId){
+        public function chapterDetail_get($mangaId, $chapterId){
             $imageList = $this->chapterDao->getByChapterId($chapterId);
+            $mangaDetail = $this->mangaDao->getDetailManga($mangaId);
+            $source = $this->sourceDao->getById($mangaDetail['source_id']);
+            $imageBaseUrl = $source['base_url'];
             $chapterImages = array();
             foreach($imageList as $chapterImage) {
+                $imageUrl = $chapterImage->image_url;
+                if(!$this->commonutils->startsWith($chapterImage->image_url, 'http')) {
+                    $imageUrl = $imageBaseUrl.$chapterImage->image_url;
+                } 
+
                 $tmp = array(
                     "id" => (int) $chapterImage->id,
-                    "image_url" => $chapterImage->image_url, 
+                    "image_url" => $imageUrl, 
                     "width" => $chapterImage->width, 
                     "height" => $chapterImage->height
                 );
