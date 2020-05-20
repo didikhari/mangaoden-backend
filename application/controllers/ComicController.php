@@ -80,7 +80,7 @@
             foreach($artistList as $artist) {
                 array_push($artists, $artist->name);
             }
-
+            
             $responseBody = array(
                 'id' => $mangaDetail['id'],
                 'title' => $mangaDetail['title'],
@@ -91,7 +91,7 @@
                 //'total_chapter' => (int) $mangaDetail['chapters_len'],
                 'hits' => (int) $mangaDetail['hits'],
                 'is_licenced' => $mangaDetail['is_licenced'],
-                'source' => $mangaDetail['source'],
+                //'source' => $mangaDetail['source'],
                 'authors' => $authors,
                 'artists' => $artists,
                 'description' => $mangaDetail['description'],
