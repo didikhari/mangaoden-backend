@@ -60,7 +60,7 @@
                                 // log_message('info', 'Url: '. $chapter->href);
                                 $chapterDb['source_chapter_url'] = $chapterLink->href;
                                 if($chapterReleaseDate){
-                                    $releaseDate = $this->commonutils->formatDate($chapterReleaseDate, $dateFormatFlag);
+                                    $releaseDate = $this->commonutils->formatDate($chapterReleaseDate->innertext, $dateFormatFlag);
                                     $chapterDb['release_date'] = $releaseDate;
                                 } else {
                                     $chapterDb['release_date'] = date("Y/m/d H:i:sa");
