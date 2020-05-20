@@ -59,6 +59,8 @@ $route['api/v1/home/hot'] = 'HomeController/comics/last_update_date';
 $route['api/v1/home/favorite'] = 'HomeController/comics/hits';
 $route['api/v1/comics'] = 'ComicController/comics';
 $route['api/v1/comics/(:any)'] = 'ComicController/comicsDetail/$1';
+$route['api/v1/comics/(:any)/chapters'] = 'ChapterController/chapters/$1';
+$route['api/v1/chapters/(:any)'] = 'ChapterController/chapterDetail/$1';
 
 /* zeroscans */
 $route['retriever/zeroscans/star-martial-god-technique'] = 'ZeroScansRetriever/manga/1';
