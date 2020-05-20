@@ -50,7 +50,7 @@
 
         public function comicsDetail_get($mangaId){
             $mangaDetail = $this->mangaDao->getDetailManga($mangaId);
-            $chapterList = $this->chapterDao->getListChapter(0, 5, 'number', 'DESC', $mangaId);
+            $chapterList = $this->chapterDao->getListChapter(0, 5, 'id', 'DESC', $mangaId);
             $categoryList = $this->categoryDao->getByMangaId($mangaId);
             $authorList = $this->authorDao->getByMangaId($mangaId);
             $artistList = $this->artistDao->getByMangaId($mangaId);
