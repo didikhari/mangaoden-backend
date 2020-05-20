@@ -29,7 +29,7 @@
         }
 
         public function getByMangaId($mangaId){
-            $this->db->order_by('number', 'ASC');
+            $this->db->order_by('id', 'DESC');
             $query = $this->db->get_where('chapter', array('manga_id' => $mangaId));
             return $query->result();
         }
