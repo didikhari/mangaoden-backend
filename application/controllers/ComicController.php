@@ -90,7 +90,7 @@
                 'last_chapter_date' => $mangaDetail['last_chapter_date'],
                 'total_chapter' => (int) $totalChapter,
                 'hits' => (int) $mangaDetail['hits'],
-                'is_licenced' => $mangaDetail['is_licenced'],
+                'is_licenced' => $mangaDetail['is_licenced'] == 0 ? false : true,
                 //'source' => $mangaDetail['source'],
                 'authors' => $authors,
                 'artists' => $artists,
