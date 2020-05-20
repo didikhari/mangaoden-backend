@@ -37,10 +37,10 @@
             $chapterImages = array();
             foreach($imageList as $chapterImage) {
                 $tmp = array(
-                    "id" => (int) $chapter->id,
-                    "image_url" => $chapter->image_url, 
-                    "width" => $chapter->width, 
-                    "height" => $chapter->height
+                    "id" => (int) $chapterImage->id,
+                    "image_url" => $chapterImage->image_url, 
+                    "width" => $chapterImage->width, 
+                    "height" => $chapterImage->height
                 );
                 array_push($chapterImages, $tmp);
             }
