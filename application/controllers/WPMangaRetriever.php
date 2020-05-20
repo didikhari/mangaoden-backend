@@ -18,7 +18,7 @@
             $selectedManga = $this->mangaDao->getDetailManga($mangaId);
             $html = file_get_html($selectedManga['source_manga_url']);
             //$ratingPostId = $html->find('input[class=rating-post-id]', 0)->value;
-            //log_message('info', $ratingPostId);
+            //log_message('info', $html);
             foreach($html->find('script') as $script){
                 
                 if (strpos($script->innertext, 'var manga = ') !== false) {
@@ -92,6 +92,8 @@
             $dataDB = array();
             foreach($contents as $content){
                 $imgUrl = trim($content->{'data-src'});
+                if ($this->commonutils->IsNullOrEmptyString($imgUrl))
+                    $imgUrl = trim($content->{'src'});
                 //log_message('info', 'Url: '. $imgUrl);
                 $filename = basename(parse_url($imgUrl, PHP_URL_PATH));
                 $this->commonutils->downloadImage($folder, $filename, $imgUrl, 300);

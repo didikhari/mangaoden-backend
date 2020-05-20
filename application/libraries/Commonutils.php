@@ -106,5 +106,9 @@
             // log_message('info', 'data: '.$a.';base64,'.$imageData);
             return 'data: '.$a.';base64,'.$imageData;
         }
+
+        function IsNullOrEmptyString($str){
+            return (!isset($str) || trim($str) === '');
+        }
     }
 ?>

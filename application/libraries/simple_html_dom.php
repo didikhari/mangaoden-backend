@@ -74,22 +74,14 @@ function file_get_html(
 	 * For sourceforge users: uncomment the next line and comment the
 	 * retrieve_url_contents line 2 lines down if it is not already done.
 	 */
-	// $contents = file_get_contents(
-	// 	$url,
-	// 	$use_include_path,
-	// 	$context,
-	// 	$offset,
-	// 	$maxLen
-	// );
-
-	// $contents = retrieve_url_contents($url);
-	
-	$contents = get_contents(
+	$contents = file_get_contents(
 		$url,
 		$use_include_path,
 		$context,
 		$offset,
-		$maxLen);
+		$maxLen
+	);
+	// $contents = retrieve_url_contents($url);
 
 	if (empty($contents) || strlen($contents) > $maxLen) {
 		$dom->clear();
@@ -98,33 +90,6 @@ function file_get_html(
 
 	return $dom->load($contents, $lowercase, $stripRN);
 }
-
-function get_contents($url, $use_include_path, $context, $offset, $maxLen) {
-	if (function_exists('curl_exec')) {
-	  $header[0] = "Accept-Language: en-us,en;q=0.5";
-	  $ua = 'Mozilla/5.0 (Windows NT 5.1; rv:2.0.1) Gecko/20100101 Firefox/4.0.1';
-	  $referer = 'http://www.google.com/';
-	  $curl = curl_init();
-	  curl_setopt($curl, CURLOPT_URL, $url);
-	  curl_setopt($curl, CURLOPT_USERAGENT, $ua);
-	  curl_setopt($curl, CURLOPT_REFERER, $referer);
-	  curl_setopt($curl, CURLOPT_HTTPHEADER, $header);
-	  curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-	  curl_setopt($curl, CURLOPT_TIMEOUT, 10);
-	  $content = curl_exec($curl);
-	  curl_close($curl);
-	}
-	else { 
-	  $content = file_get_contents(
-					$url,
-					$use_include_path,
-					$context,
-					$offset,
-					$maxLen
-				);
-	}
-	return $content;
-  }
 
 function str_get_html(
 	$str,
