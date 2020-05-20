@@ -23,7 +23,7 @@
             $respManga = [];
             foreach($listManga as $manga){
                 $mangaData = array(
-                    "id" => $manga['id'],
+                    "id" => (int) $manga['id'],
                     "cover" => $manga['cover_url'],
                     "title" => $manga['title'],
                     "last_chapter_date" => $manga['last_chapter_date'],
@@ -82,7 +82,7 @@
             }
             
             $responseBody = array(
-                'id' => $mangaDetail['id'],
+                'id' => (int) $mangaDetail['id'],
                 'title' => $mangaDetail['title'],
                 'background' => $mangaDetail['background'],
                 'cover' => $mangaDetail['cover_url'],
