@@ -27,7 +27,7 @@
                     "id" => (int) $manga['id'],
                     "cover" => $manga['cover_url'],
                     "title" => $manga['title'],
-                    "last_chapter_date" => $lastChapter['release_date'],
+                    "last_chapter_date" => $lastChapter['release_date'] == null ? $lastChapter['retrieve_date'] : $lastChapter['release_date'],
                     "last_chapter_no" => $lastChapter['number'],
                     "last_chapter_title" => $lastChapter['title'],
                     "last_chapter_id" => (int) $lastChapter['id'],
