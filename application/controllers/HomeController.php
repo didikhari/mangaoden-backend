@@ -16,7 +16,7 @@
                 $image = array(
                     'img' => $comic['image_url'],
                     'title' => $comic['title'],
-                    'id' => $comic['manga_id']
+                    'id' => (int) $comic['manga_id']
                 );
                 array_push($images, $image);
             }
@@ -38,7 +38,7 @@
                 $image = array(
                     'img' => $comic['cover_url'],
                     'title' => $comic['title'],
-                    'id' => $comic['id']
+                    'id' => (int) $comic['id']
                 );
                 array_push($images, $image);
             }

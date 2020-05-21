@@ -67,5 +67,12 @@
             $this->db->from('chapter');
             return $this->db->count_all_results();
         }
+
+        public function getLastChapterByMangaId($mangaId){
+            $this->db->order_by('number', 'DESC');
+            $this->db->limit(1);
+            $query = $this->db->get_where('chapter', array('manga_id' => $mangaId));
+            return $query->row_array();
+        }
     }
 ?>
