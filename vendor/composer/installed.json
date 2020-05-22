@@ -110,6 +110,58 @@
         ]
     },
     {
+        "name": "fzaninotto/faker",
+        "version": "v1.9.1",
+        "version_normalized": "1.9.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/fzaninotto/Faker.git",
+            "reference": "fc10d778e4b84d5bd315dad194661e091d307c6f"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/fc10d778e4b84d5bd315dad194661e091d307c6f",
+            "reference": "fc10d778e4b84d5bd315dad194661e091d307c6f",
+            "shasum": ""
+        },
+        "require": {
+            "php": "^5.3.3 || ^7.0"
+        },
+        "require-dev": {
+            "ext-intl": "*",
+            "phpunit/phpunit": "^4.8.35 || ^5.7",
+            "squizlabs/php_codesniffer": "^2.9.2"
+        },
+        "time": "2019-12-12T13:22:17+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.9-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Faker\\": "src/Faker/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "François Zaninotto"
+            }
+        ],
+        "description": "Faker is a PHP library that generates fake data for you.",
+        "keywords": [
+            "data",
+            "faker",
+            "fixtures"
+        ]
+    },
+    {
         "name": "google/apiclient",
         "version": "v2.4.1",
         "version_normalized": "2.4.1.0",
@@ -458,6 +510,57 @@
             "stream",
             "uri",
             "url"
+        ]
+    },
+    {
+        "name": "imagekit/imagekit",
+        "version": "1.2.0",
+        "version_normalized": "1.2.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/imagekit-developer/imagekit-php.git",
+            "reference": "e05c8ab45a86fefa8d0756cea015260a1baf7814"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/imagekit-developer/imagekit-php/zipball/e05c8ab45a86fefa8d0756cea015260a1baf7814",
+            "reference": "e05c8ab45a86fefa8d0756cea015260a1baf7814",
+            "shasum": ""
+        },
+        "require": {
+            "ext-curl": "*",
+            "ext-json": "*",
+            "fzaninotto/faker": "^1.9",
+            "guzzlehttp/guzzle": "~6.0"
+        },
+        "require-dev": {
+            "ext-json": "*",
+            "phpunit/phpunit": "^7"
+        },
+        "time": "2020-03-06T05:18:10+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "ImageKit\\": "src/ImageKit/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Imagekit",
+                "homepage": "https://github.com/imagekit-developer/imagekit-php/graphs/contributors"
+            }
+        ],
+        "description": "PHP library for Imagekit",
+        "homepage": "https://github.com/imagekit-developer/imagekit-php",
+        "keywords": [
+            "image management",
+            "imagekit",
+            "library"
         ]
     },
     {

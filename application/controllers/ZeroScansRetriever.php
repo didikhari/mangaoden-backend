@@ -10,6 +10,7 @@
             $this->load->model('chapterDao');
             $this->load->model('chapterImageDao');
             $this->load->library('Commonutils');
+            $this->load->library('Imagekitutils');
         }
 
         public function manga_get($mangaId) {
@@ -80,6 +81,7 @@
                         //$mimeType = $this->commonutils->getMimeTypes($imgUrl);
                         $filename = basename(parse_url($imgUrl, PHP_URL_PATH));
                         $this->commonutils->downloadImage($folder, $filename, ZEROSCANS_IMAGE_BASE_URL.$imgUrl, 300);
+                        $this->imagekitutils->upload(ZEROSCANS_IMAGE_BASE_URL.$imgUrl, $filename, $folder);
                         array_push($dataDB, array(
                             'chapter_id' => $chapterId ,
                             'image_url' => $imgUrl ,

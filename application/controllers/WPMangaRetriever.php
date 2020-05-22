@@ -11,6 +11,7 @@
             $this->load->model('mangaDao');
             $this->load->model('chapterDao');
             $this->load->model('chapterImageDao');
+            $this->load->library('Imagekitutils');
             $this->load->library('Commonutils');
         }
 
@@ -98,6 +99,7 @@
                 //log_message('info', 'Url: '. $imgUrl);
                 $filename = basename(parse_url($imgUrl, PHP_URL_PATH));
                 $this->commonutils->downloadImage($folder, $filename, $imgUrl, 300);
+                $this->imagekitutils->upload($imgUrl, $filename, $folder);
                 array_push($dataDB, array(
                     'chapter_id' => $chapterId ,
                     'image_url' => $imgUrl ,

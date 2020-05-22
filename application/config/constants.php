@@ -84,6 +84,10 @@ defined('EXIT_DATABASE')       OR define('EXIT_DATABASE', 8); // database error
 defined('EXIT__AUTO_MIN')      OR define('EXIT__AUTO_MIN', 9); // lowest automatically-assigned error code
 defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest automatically-assigned error code
 
+defined('IMAGEKIT_PUBLIC_KEY')    OR define('IMAGEKIT_PUBLIC_KEY', 'public_Th7uTngvT7pwUkwCP78roV/gnxs=');
+defined('IMAGEKIT_PRIVATE_KEY')    OR define('IMAGEKIT_PRIVATE_KEY', 'private_ciyCkHBeR6sBg3OHUB7kyNuBUkw=');
+defined('IMAGEKIT_ENDPOINT')    OR define('IMAGEKIT_ENDPOINT', 'https://ik.imagekit.io/5txg27pmwc');
+
 defined('MANGAEDEN_API_URL')    OR define('MANGAEDEN_API_URL', 'https://www.mangaeden.com/api/');
 defined('MANGAEDEN_IMAGE_BASE_URL')    OR define('MANGAEDEN_IMAGE_BASE_URL', 'https://cdn.mangaeden.com/mangasimg/');
 defined('SOURCE_MANGAEDEN')    OR define('SOURCE_MANGAEDEN', '0');

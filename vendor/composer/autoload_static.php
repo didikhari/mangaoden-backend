@@ -48,6 +48,10 @@ class ComposerStaticInit769d664e9744bfcc3a65eea0569a9d87
         array (
             'Monolog\\' => 8,
         ),
+        'I' => 
+        array (
+            'ImageKit\\' => 9,
+        ),
         'G' => 
         array (
             'GuzzleHttp\\Psr7\\' => 16,
@@ -58,6 +62,7 @@ class ComposerStaticInit769d664e9744bfcc3a65eea0569a9d87
         'F' => 
         array (
             'Firebase\\JWT\\' => 13,
+            'Faker\\' => 6,
         ),
         'D' => 
         array (
@@ -121,6 +126,10 @@ class ComposerStaticInit769d664e9744bfcc3a65eea0569a9d87
         array (
             0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
         ),
+        'ImageKit\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/imagekit/imagekit/src/ImageKit',
+        ),
         'GuzzleHttp\\Psr7\\' => 
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/psr7/src',
@@ -140,6 +149,10 @@ class ComposerStaticInit769d664e9744bfcc3a65eea0569a9d87
         'Firebase\\JWT\\' => 
         array (
             0 => __DIR__ . '/..' . '/firebase/php-jwt/src',
+        ),
+        'Faker\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker',
         ),
         'Doctrine\\Instantiator\\' => 
         array (
