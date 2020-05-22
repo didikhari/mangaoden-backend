@@ -11,8 +11,8 @@
             $this->load->model('mangaDao');
             $this->load->model('chapterDao');
             $this->load->model('chapterImageDao');
-            $this->load->library('Imagekitutils');
-            //$this->load->library('Commonutils');
+            //$this->load->library('Imagekitutils');
+            $this->load->library('Commonutils');
         }
 
         public function manga_get($mangaId, $dateFormatFlag) {
