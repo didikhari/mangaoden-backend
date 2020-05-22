@@ -13,7 +13,7 @@
             );
 
             $uploadFile = $imageKit->upload(array(
-                'file' => fopen($folder.'/'.$filename, 'r'),
+                'file' => fopen($folder.'/'.$fileName, 'r'),
                 'fileName' => $fileName,
                 'folder' => $folder,
                 "useUniqueFileName" => false,
