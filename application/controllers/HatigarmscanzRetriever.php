@@ -29,7 +29,7 @@
             $chapters = $chapterWrapper->find('a');
             
             for ($i=count($chapters); $i > 0; $i--) { 
-                $chapter = $chapters[$i];
+                $chapter = $chapters[$i-1];
                 if($this->commonutils->startsWith($chapter->class, 'item-author')) {
                     
                     $number = $chapter->parent()->parent()->find('span', 0);
