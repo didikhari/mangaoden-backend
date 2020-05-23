@@ -81,14 +81,14 @@
         }
 
         public function getPrevChapter($mangaId, $currentChapterNumber) {
-            $this->db->order_by('number', 'ASC');
+            $this->db->order_by('number', 'DESC');
             $this->db->limit(1);
             $query = $this->db->get_where('chapter', array('manga_id' => $mangaId, 'number < ' => $currentChapterNumber));
             return $query->row_array();
         }
 
         public function getNextChapter($mangaId, $currentChapterNumber) {
-            $this->db->order_by('number', 'ASC');
+            $this->db->order_by('number', 'DESC');
             $this->db->limit(1);
             $query = $this->db->get_where('chapter', array('manga_id' => $mangaId, 'number > ' => $currentChapterNumber));
             return $query->row_array();
