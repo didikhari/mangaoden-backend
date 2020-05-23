@@ -11,7 +11,7 @@
             $this->load->model('mangaDao');
             $this->load->model('chapterDao');
             $this->load->model('chapterImageDao');
-            //$this->load->library('Imagekitutils');
+            $this->load->library('Imagekitutils');
             $this->load->library('Commonutils');
         }
 
@@ -72,7 +72,7 @@
                                 $chapterDb['number'] = $this->commonutils->getChapterNoFromTitile($chapterNumber);
                                 $chapterId = $this->chapterDao->save($chapterDb);
             
-                                $this->fetchChapterImage($chapterId, $chapterLink->href, 'images/'.$selectedManga['drive_folder_id'].'/'.$chapterNumber);
+                                $this->fetchChapterImage($chapterId, $chapterLink->href, 'images/'.$selectedManga['drive_folder_id'].'/'.$chapterDb['number']);
                                 break;
                             }
 
@@ -100,12 +100,22 @@
                     $imgUrl = trim($content->{'src'});
                 //log_message('info', 'Url: '. $imgUrl);
                 $filename = basename(parse_url($imgUrl, PHP_URL_PATH));
-                $this->commonutils->downloadImage($folder, $filename, $imgUrl, 300);
-                //$this->imagekitutils->upload($imgUrl, $filename, $folder);
+                //$this->commonutils->downloadImage($folder, $filename, $imgUrl, 300);
+                $uploadedImage = $this->imagekitutils->upload($imgUrl, $filename, $folder);
+                if(isset($uploadedImage) && isset($uploadedImage->success) ) {
+                    $height = $uploadedImage->success->height;
+                    $width = $uploadedImage->success->width;
+                    $size = $uploadedImage->success->size;
+                    $imagekitUrl = $uploadedImage->success->url;
+                }
                 array_push($dataDB, array(
                     'chapter_id' => $chapterId ,
                     'image_url' => $imgUrl ,
-                    'drive_file_id' => $folder.'/'.$filename
+                    'drive_file_id' => $folder.'/'.$filename,
+                    'height' => isset($height) ? $height : null,
+                    'width' => isset($width) ? $width : null,
+                    'size' => isset($size) ? $size : null,
+                    'imagekit_url' => isset($imagekitUrl) ? $imagekitUrl : null
                     )
                 );
             }

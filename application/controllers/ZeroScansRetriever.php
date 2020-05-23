@@ -10,7 +10,7 @@
             $this->load->model('chapterDao');
             $this->load->model('chapterImageDao');
             $this->load->library('Commonutils');
-            //$this->load->library('Imagekitutils');
+            $this->load->library('Imagekitutils');
         }
 
         public function manga_get($mangaId) {
@@ -83,11 +83,21 @@
                         //$mimeType = $this->commonutils->getMimeTypes($imgUrl);
                         $filename = basename(parse_url($imgUrl, PHP_URL_PATH));
                         $this->commonutils->downloadImage($folder, $filename, ZEROSCANS_IMAGE_BASE_URL.$imgUrl, 300);
-                        //$this->imagekitutils->upload(ZEROSCANS_IMAGE_BASE_URL.$imgUrl, $filename, $folder);
+                        $uploadedImage = $this->imagekitutils->upload(ZEROSCANS_IMAGE_BASE_URL.$imgUrl, $filename, $folder);
+                        if( isset($uploadedImage) && isset($uploadedImage->success) ) {
+                            $height = $uploadedImage->success->height;
+                            $width = $uploadedImage->success->width;
+                            $size = $uploadedImage->success->size;
+                            $imagekitUrl = $uploadedImage->success->url;
+                        }
                         array_push($dataDB, array(
                             'chapter_id' => $chapterId ,
                             'image_url' => $imgUrl ,
-                            'drive_file_id' => $folder.'/'.$filename
+                            'drive_file_id' => $folder.'/'.$filename,
+                            'height' => isset($height) ? $height : null,
+                            'width' => isset($width) ? $width : null,
+                            'size' => isset($size) ? $size : null,
+                            'imagekit_url' => isset($imagekitUrl) ? $imagekitUrl : null
                             //'image_base64' => $this->commonutils->imageUrlToBase64(ZEROSCANS_IMAGE_BASE_URL.$imgUrl)
                             )
                         );
