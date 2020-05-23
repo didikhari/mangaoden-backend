@@ -28,7 +28,9 @@
             $chapterWrapper = $descWrapper->children(2)->first_child();
             $chapters = $chapterWrapper->find('a');
             
-            foreach ($chapters as $chapter) {
+            //foreach ($chapters as $chapter) {
+            for ($i=count($chapters); $i > 0; $i--) { 
+                $chapter = $chapters[$i];
                 if($this->commonutils->startsWith($chapter->class, 'item-author')) {
                     
                     $number = $chapter->parent()->parent()->find('span', 0);

@@ -42,7 +42,9 @@
                     $versionsList = $content->find('ul', 0);
                     $chapters = $versionsList->find('li');
                     
-                    foreach ($chapters as $chapter) {
+                    //foreach ($chapters as $chapter) {
+                    for ($i=count($chapters); $i > 0; $i--) { 
+                        $chapter = $chapters[$i-1];
                         if($this->commonutils->startsWith($chapter->class, 'wp-manga-chapter')) {
                             $chapterLink = $chapter->find('a', 0);
                             $chapterReleaseDateWrapper = $chapter->find('span[class=chapter-release-date]', 0);
