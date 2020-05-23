@@ -55,7 +55,24 @@
                 );
                 array_push($chapterImages, $tmp);
             }
+            
+            $chapter = $this->chapterDao->getChapterById($chapterId);
+            $prevChapter = $this->chapterDao->getPrevChapter($mangaId, $chapter['number']);
+            $nextChapter = $this->chapterDao->getNextChapter($mangaId, $chapter['number']);
+            $prevChapter = array(
+                "id" => (int) $prevChapter['id'],
+                'title' => $prevChapter['title'],
+                'number' => $prevChapter['number']
+            );
+            $nextChapter = array(
+                "id" => (int) $nextChapter['id'],
+                'title' => $prevChapter['title'],
+                'number' => $prevChapter['number']
+            );
+
             $responseBody = array(
+                'prev_chapter' => $prevChapter,
+                'next_chapter' => $nextChapter,
                 'images' => $chapterImages
             );
 
