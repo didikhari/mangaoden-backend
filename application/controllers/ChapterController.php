@@ -57,22 +57,27 @@
             }
             
             $chapter = $this->chapterDao->getChapterById($chapterId);
-            $prevChapter = $this->chapterDao->getPrevChapter($mangaId, $chapter['number']);
-            $nextChapter = $this->chapterDao->getNextChapter($mangaId, $chapter['number']);
-            $prevChapter = array(
-                "id" => (int) $prevChapter['id'],
-                'title' => $prevChapter['title'],
-                'number' => $prevChapter['number']
-            );
-            $nextChapter = array(
-                "id" => (int) $nextChapter['id'],
-                'title' => $prevChapter['title'],
-                'number' => $prevChapter['number']
-            );
-
+            $prevChapterDb = $this->chapterDao->getPrevChapter($mangaId, $chapter['number']);
+            $nextChapterDb = $this->chapterDao->getNextChapter($mangaId, $chapter['number']);
+            if(isset($prevChapterDb)){
+                $prevChapter = array(
+                    "id" => (int) $prevChapterDb['id'],
+                    'title' => $prevChapterDb['title'],
+                    'number' => $prevChapterDb['number']
+                );
+            }
+            
+            if(isset($nextChapterDb)) {
+                $nextChapter = array(
+                    "id" => (int) $nextChapterDb['id'],
+                    'title' => $nextChapterDb['title'],
+                    'number' => $nextChapterDb['number']
+                );
+            }
+            
             $responseBody = array(
-                'prev_chapter' => $prevChapter,
-                'next_chapter' => $nextChapter,
+                'prev_chapter' => isset($prevChapter) ? $prevChapter : null,
+                'next_chapter' => isset($nextChapter) ? $nextChapter : null,
                 'images' => $chapterImages
             );
 
