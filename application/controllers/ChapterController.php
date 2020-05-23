@@ -42,11 +42,14 @@
             $imageBaseUrl = $source['base_url'];
             $chapterImages = array();
             foreach($imageList as $chapterImage) {
-                $imageUrl = $chapterImage->image_url;
-                if(!$this->commonutils->startsWith($chapterImage->image_url, 'http')) {
-                    $imageUrl = $imageBaseUrl.$chapterImage->image_url;
-                } 
-
+                $imageUrl = $chapterImage->imagekit_url;
+                if(!isset($imageUrl)){
+                    $imageUrl = $chapterImage->image_url;
+                    if(!$this->commonutils->startsWith($chapterImage->image_url, 'http')) {
+                        $imageUrl = $imageBaseUrl.$chapterImage->image_url;
+                    } 
+                }
+                
                 $tmp = array(
                     "id" => (int) $chapterImage->id,
                     "image_url" => $imageUrl, 
