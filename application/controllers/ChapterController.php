@@ -44,10 +44,11 @@
             foreach($imageList as $chapterImage) {
                 $imageUrl = $chapterImage->imagekit_url;
                 if(is_null($imageUrl) || empty($imageUrl)){
-                    $imageUrl = $chapterImage->image_url;
-                    if(!$this->commonutils->startsWith($chapterImage->image_url, 'http')) {
-                        $imageUrl = $imageBaseUrl.$chapterImage->image_url;
-                    } 
+                    $imageUrl = IMAGEKIT_ENDPOINT.'/'.$chapterImage->drive_file_id;
+                    // $imageUrl = $chapterImage->image_url;
+                    // if(!$this->commonutils->startsWith($chapterImage->image_url, 'http')) {
+                    //     $imageUrl = $imageBaseUrl.$chapterImage->image_url;
+                    // } 
                 }
                 
                 $tmp = array(
