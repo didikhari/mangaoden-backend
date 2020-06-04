@@ -22,7 +22,7 @@
             //log_message('info', $html);
             foreach($html->find('script') as $script){
                 
-                if (strpos($script->innertext, 'var manga = ') !== false) {
+                if (strpos($script->innertext, 'var manga') !== false) {
                     $removedCDataScript = str_replace('/*', '', $script->innertext);
                     $removedCDataScript = str_replace('<![CDATA[ */', '', $removedCDataScript);
                     $removedCDataScript = str_replace('/*', '', $removedCDataScript);
@@ -30,6 +30,7 @@
                     $removedCDataScript = str_replace('*/', '', $removedCDataScript);
                     $removedCDataScript = str_replace(';', '', $removedCDataScript);
                     $removedCDataScript = str_replace('var manga =', '', $removedCDataScript);
+                    $removedCDataScript = str_replace('var manga=', '', $removedCDataScript);
                     //log_message('info', trim($removedCDataScript));
                     $mangaAjax = json_decode(trim($removedCDataScript));
                     
