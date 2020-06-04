@@ -76,5 +76,8 @@ $route['retriever/hatigarmscanz/the-scholars-reincarnation'] = 'HatigarmscanzRet
 $route['retriever/earlymanga/master-of-legendary-realms'] = 'WPMangaRetriever/manga/6/3';
 $route['retriever/earlymanga/the-last-human'] = 'WPMangaRetriever/manga/9/3';
 
-/* mangatx */
+/* manhuas */
 $route['retriever/mangatx/the-demon-blades'] = 'WPMangaRetriever/manga/8/2';
+
+/* kissmanga */
+$route['retriever/kissmanga/master-of-gu'] = 'WPMangaRetriever/manga/10/2';
