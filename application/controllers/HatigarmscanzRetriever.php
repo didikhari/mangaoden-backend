@@ -82,7 +82,7 @@
                         //$content = $this->commonutils->curl_get_contents($imgUrl);
                         //$mimeType = $this->commonutils->getMimeTypes($imgUrl);
                         $filename = basename(parse_url($imgUrl, PHP_URL_PATH));
-                        $this->commonutils->downloadImage($folder, $filename, HATIGARMSCANZ_IMAGE_BASE_URL.$imgUrl, 300);
+                        //$this->commonutils->downloadImage($folder, $filename, HATIGARMSCANZ_IMAGE_BASE_URL.$imgUrl, 300);
                         $uploadedImage = $this->imagekitutils->upload(HATIGARMSCANZ_IMAGE_BASE_URL.$imgUrl, $filename, $folder);
                         if(isset($uploadedImage) && isset($uploadedImage->success) ) {
                             $height = $uploadedImage->success->height;
