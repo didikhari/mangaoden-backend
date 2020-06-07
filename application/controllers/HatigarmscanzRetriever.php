@@ -35,9 +35,7 @@
                     $number = $chapter->parent()->parent()->find('span', 0);
                     // log_message('info', 'Chapter Number: '. $number->innertext);
                     $chapterNumber = trim($number->innertext);
-                    if($mangaId == 5 && floatval($chapterNumber) < 1)
-                        continue;
-                    $chapterExist = $this->chapterDao->countMangaChapter($mangaId, $chapterNumber);
+                    $chapterExist = $this->chapterDao->countMangaChapterByTitle($mangaId,  $chapter->innertext);
                     // log_message('info', 'chapterExist '.$chapterExist);
 
                     if($chapterExist == 0) {
