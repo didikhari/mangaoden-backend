@@ -35,7 +35,7 @@
                     $number = $chapter->parent()->parent()->find('span', 0);
                     // log_message('info', 'Chapter Number: '. $number->innertext);
                     $chapterNumber = trim($number->innertext);
-                    $chapterExist = $this->chapterDao->countMangaChapterByTitle($mangaId,  $chapter->innertext);
+                    $chapterExist = $this->chapterDao->countMangaChapterByTitle($mangaId,  trim($chapter->innertext));
                     // log_message('info', 'chapterExist '.$chapterExist);
 
                     if($chapterExist == 0) {
@@ -43,7 +43,7 @@
                             "manga_id" => $mangaId
                         );
                         // log_message('info', 'Chapter: '. $chapter->innertext);
-                        $chapterDb['title'] = $chapter->innertext;
+                        $chapterDb['title'] = trim($chapter->innertext);
         
                         // log_message('info', 'Url: '. $chapter->href);
                         $chapterDb['source_chapter_url'] = $chapter->href;
