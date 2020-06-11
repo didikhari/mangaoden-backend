@@ -79,11 +79,11 @@
                     $dataDB = array();
                     foreach($dataImgJson as $imgUrl) {
                         // log_message('info', "Image URL: ".$imgUrl);
-                        $content = $this->commonutils->curl_get_contents(HATIGARMSCANZ_IMAGE_BASE_URL.$imgUrl, 300);
+                        //$content = $this->commonutils->curl_get_contents(HATIGARMSCANZ_IMAGE_BASE_URL.$imgUrl, 300);
                         //$mimeType = $this->commonutils->getMimeTypes($imgUrl);
                         $filename = basename(parse_url($imgUrl, PHP_URL_PATH));
                         //$this->commonutils->downloadImage($folder, $filename, HATIGARMSCANZ_IMAGE_BASE_URL.$imgUrl, 300);
-                        $uploadedImage = $this->imagekitutils->upload($content, $filename, $folder);
+                        $uploadedImage = $this->imagekitutils->upload(HATIGARMSCANZ_IMAGE_BASE_URL.$imgUrl, $filename, $folder);
                         if(isset($uploadedImage) && isset($uploadedImage->success) ) {
                             $height = $uploadedImage->success->height;
                             $width = $uploadedImage->success->width;
