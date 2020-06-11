@@ -96,7 +96,6 @@ defined('ZEROSCANS_API_URL')    OR define('ZEROSCANS_API_URL', 'https://zeroscan
 defined('ZEROSCANS_IMAGE_BASE_URL')    OR define('ZEROSCANS_IMAGE_BASE_URL', 'https://zeroscans.com/');
 defined('SOURCE_ZEROSCANS')    OR define('SOURCE_ZEROSCANS', '1');
 
-
 defined('HATIGARMSCANZ_API_URL')    OR define('HATIGARMSCANZ_API_URL', 'https://hatigarmscanz.net/');
 defined('HATIGARMSCANZ_IMAGE_BASE_URL')    OR define('HATIGARMSCANZ_IMAGE_BASE_URL', 'https://hatigarmscanz.net/');
 defined('SOURCE_HATIGARMSCANZ')    OR define('SOURCE_HATIGARMSCANZ', '2');
@@ -104,3 +103,7 @@ defined('SOURCE_HATIGARMSCANZ')    OR define('SOURCE_HATIGARMSCANZ', '2');
 defined('EARLYMANGA_API_URL')    OR define('EARLYMANGA_API_URL', 'https://earlymanga.net/');
 defined('EARLYMANGA_IMAGE_BASE_URL')    OR define('EARLYMANGA_IMAGE_BASE_URL', 'https://hatigarmscanz.net/');
 defined('SOURCE_EARLYMANGA')    OR define('SOURCE_EARLYMANGA', '3');
+
+defined('LEVIATANSCANS_API_URL')    OR define('LEVIATANSCANS_API_URL', 'https://leviatanscans.com/');
+defined('LEVIATANSCANS_IMAGE_BASE_URL')    OR define('LEVIATANSCANS_IMAGE_BASE_URL', 'https://leviatanscans.com/');
+defined('SOURCE_LEVIATANSCANS')    OR define('SOURCE_LEVIATANSCANS', '2');
