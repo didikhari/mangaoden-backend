@@ -112,7 +112,7 @@
                 array_push($dataDB, array(
                     'chapter_id' => $chapterId ,
                     'image_url' => $imgUrl ,
-                    'drive_file_id' => $folder.'/'.$filename,
+                    //'drive_file_id' => $folder.'/'.$filename,
                     'height' => isset($height) ? $height : null,
                     'width' => isset($width) ? $width : null,
                     'size' => isset($size) ? $size : null,
