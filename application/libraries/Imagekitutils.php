@@ -13,9 +13,9 @@
                 IMAGEKIT_ENDPOINT
             );
 
-            if(file_exists ( $folder.'/'.$fileName )) {
-                $file = fopen($folder.'/'.$fileName, 'r');
-            }
+            // if(file_exists ( $folder.'/'.$fileName )) {
+            //     $file = fopen($folder.'/'.$fileName, 'r');
+            // }
 
             $uploadFile = $imageKit->upload(array(
                 'file' => $file,
