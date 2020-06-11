@@ -68,7 +68,7 @@
             $html = file_get_html($sourceUrl);
             $content = $html->find('div[id=content]', 0);
             $container = $content->first_child();
-            $script = $container->$container->children (6);
+            $script = $container->children (6);
             $datas = explode(';', $script->innertext);
             foreach ($datas as $data) {
                 if ($this->commonutils->startsWith($data, 'window.chapterPages')){
