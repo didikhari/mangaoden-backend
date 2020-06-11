@@ -81,3 +81,6 @@ $route['retriever/mangatx/the-demon-blades'] = 'WPMangaRetriever/manga/8/2';
 
 /* kissmanga */
 $route['retriever/kissmanga/master-of-gu'] = 'WPMangaRetriever/manga/10/2';
+
+/* leviatanscans */
+$route['retriever/leviatanscans/legend-of-the-northern-blade'] = 'LeviatanscansRetriever/manga/11';
