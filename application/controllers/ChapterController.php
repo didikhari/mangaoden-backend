@@ -43,18 +43,20 @@
             $chapterImages = array();
             foreach($imageList as $chapterImage) {
                 $imageUrl = $chapterImage->imagekit_url;
-                if(is_null($imageUrl) || empty($imageUrl)){
-                    $imageUrl = IMAGEKIT_ENDPOINT.'/'.$chapterImage->drive_file_id;
+                if(is_null($imageUrl) || empty($imageUrl)) {
+                    if(is_null($chapterImage->drive_file_id) || empty($chapterImage->drive_file_id)) {
+                        $imageUrl = $chapterImage->image_url;
+                        if(!$this->commonutils->startsWith($chapterImage->image_url, 'http')) {
+                            $imageUrl = $imageBaseUrl.$chapterImage->image_url;
+                        } 
+                    } else {
+                        $imageUrl = IMAGEKIT_ENDPOINT.'/'.$chapterImage->drive_file_id;
+                    }
                 }
-                $sourceImageUrl = $chapterImage->image_url;
-                if(!$this->commonutils->startsWith($chapterImage->image_url, 'http')) {
-                    $sourceImageUrl = $imageBaseUrl.$chapterImage->image_url;
-                } 
                 
                 $tmp = array(
                     "id" => (int) $chapterImage->id,
                     "image_url" => $imageUrl, 
-                    "source_image_url" => $sourceImageUrl, 
                     "width" => $chapterImage->width, 
                     "height" => $chapterImage->height
                 );
