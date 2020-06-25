@@ -23,8 +23,8 @@
                 'to' => 'fRC7yAMdTWKxKLS44UAInP:APA91bFIiwUJfPzt9X-u5OkOqRcXXuCvNgs18sikhsNb8jxhuMumKMwGtk759HpXhvbme-ducMb5f-VoE7GOVcY_2hcLvd33TCAJbv_5U-evMLcnyLFJUQkTS891GFPRoNWI3BaNf6a0',
             );
 
-            $response = Requests::post('https://fcm.googleapis.com/fcm/send', $requestHeader, $requestBody);
-            log_message('info', 'flutter response '.$response->body);
+            $response = Requests::post('https://fcm.googleapis.com/fcm/send', $requestHeader, json_encode($requestBody));
+            log_message('info', 'fcm response '.$response->body);
         } 
         
     }
