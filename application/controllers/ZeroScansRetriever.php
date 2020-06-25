@@ -11,6 +11,7 @@
             $this->load->model('chapterImageDao');
             $this->load->library('Commonutils');
             $this->load->library('Imagekitutils');
+            $this->load->library('FirebaseNotificationUtils');
         }
 
         public function manga_get($mangaId) {
@@ -53,6 +54,7 @@
                         $chapterId = $this->chapterDao->save($chapterDb);
     
                         $this->fetchChapterImage($chapterId, $chapter->href, 'images/'.$selectedManga['drive_folder_id'].'/'.$chapterNumber);
+                        $this->firebaseNotificationUtils->broadcash($selectedManga['title'].' Update', $chapterDb['number'].' : '.$chapterDb['title']);
                         break;
                     }
 
