@@ -6,7 +6,7 @@
         public function broadcash ($title, $body) {
             
             $requestHeader = array(
-                'Accept' => 'application/json', 
+                'Content-Type' => 'application/json', 
                 'Authorization' => 'key=AAAAh43dxZs:APA91bG58A7_5mPz6KdOX7xOY_DbZYYQrbCm_e7Ef3WHf6wQ-LtdGd-JoKewDpo6LaH_g-GV0cWcz7BZQuKh4_pH8XOglBuxV4i-KtDootM7_jID8srxPC2pxfMcbahBVdMn7kk2movr'
             );
 
