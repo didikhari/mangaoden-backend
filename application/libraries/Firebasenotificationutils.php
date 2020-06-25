@@ -24,7 +24,7 @@
             );
 
             $response = Requests::post('https://fcm.googleapis.com/fcm/send', $requestHeader, $requestBody);
-            log_message('info', 'flutter response '.$response);
+            log_message('info', 'flutter response '.$response->body);
         } 
         
     }
