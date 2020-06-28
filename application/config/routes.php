@@ -67,6 +67,7 @@ $route['retriever/zeroscans/star-martial-god-technique'] = 'ZeroScansRetriever/m
 $route['retriever/zeroscans/second-life-ranker'] = 'ZeroScansRetriever/manga/2';
 $route['retriever/zeroscans/wind-sword'] = 'ZeroScansRetriever/manga/3';
 $route['retriever/zeroscans/hero-i-quit-long-time-ago'] = 'ZeroScansRetriever/manga/4';
+$route['retriever/zeroscans/record-of-the-war-god'] = 'ZeroScansRetriever/manga/13';
 
 /* hatigarmscanz */
 $route['retriever/hatigarmscanz/tales-of-demons-and-gods'] = 'HatigarmscanzRetriever/manga/5';
