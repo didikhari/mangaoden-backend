@@ -67,22 +67,13 @@ $route['retriever/zeroscans/star-martial-god-technique'] = 'ZeroScansRetriever/m
 $route['retriever/zeroscans/second-life-ranker'] = 'ZeroScansRetriever/manga/2';
 $route['retriever/zeroscans/wind-sword'] = 'ZeroScansRetriever/manga/3';
 $route['retriever/zeroscans/hero-i-quit-long-time-ago'] = 'ZeroScansRetriever/manga/4';
-$route['retriever/zeroscans/record-of-the-war-god'] = 'ZeroScansRetriever/manga/13';
-
-/* hatigarmscanz */
 $route['retriever/hatigarmscanz/tales-of-demons-and-gods'] = 'HatigarmscanzRetriever/manga/5';
-$route['retriever/hatigarmscanz/the-scholars-reincarnation'] = 'HatigarmscanzRetriever/manga/7';
-
-/* earlymanga */
 $route['retriever/earlymanga/master-of-legendary-realms'] = 'WPMangaRetriever/manga/6/3';
-$route['retriever/earlymanga/the-last-human'] = 'WPMangaRetriever/manga/9/3';
-$route['retriever/earlymanga/murim-login'] = 'WPMangaRetriever/manga/12/3';
-
-/* manhuas */
+$route['retriever/hatigarmscanz/the-scholars-reincarnation'] = 'HatigarmscanzRetriever/manga/7';
 $route['retriever/mangatx/the-demon-blades'] = 'WPMangaRetriever/manga/8/2';
-
-/* kissmanga */
+$route['retriever/earlymanga/the-last-human'] = 'WPMangaRetriever/manga/9/3';
 $route['retriever/kissmanga/master-of-gu'] = 'WPMangaRetriever/manga/10/2';
-
-/* leviatanscans */
 $route['retriever/leviatanscans/legend-of-the-northern-blade'] = 'LeviatanscansRetriever/manga/11';
+$route['retriever/earlymanga/murim-login'] = 'WPMangaRetriever/manga/12/3';
+$route['retriever/zeroscans/record-of-the-war-god'] = 'ZeroScansRetriever/manga/13';
+$route['retriever/skscans/mookhyang-dark-lady'] = 'AnyScansRetriever/manga/14';
