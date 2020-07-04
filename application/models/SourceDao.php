@@ -3,8 +3,8 @@
     
     class SourceDao extends CI_Model{
         
-        public function getById($mangaId) {
-            $query = $this->db->get_where('source', array('id' => $mangaId));
+        public function getById($sourceMangaId) {
+            $query = $this->db->get_where('source', array('id' => $sourceMangaId));
             return $query->row_array();
         }
     }

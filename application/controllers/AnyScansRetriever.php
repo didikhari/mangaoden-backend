@@ -17,7 +17,7 @@
 
         public function manga_get($mangaId) {
             $selectedManga = $this->mangaDao->getDetailManga($mangaId);
-            $source = $this->sourceDao->getById($mangaId);
+            $source = $this->sourceDao->getById($selectedManga['source_id']);
             //// log_message('info', 'Manga ID: '.$selectedManga);
             $html = file_get_html($selectedManga['source_manga_url']);
             
