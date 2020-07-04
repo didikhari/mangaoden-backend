@@ -72,17 +72,17 @@
             $html = file_get_html($sourceUrl);
             $content = $html->find('div[id=content]', 0);
             $container = $content->first_child();
-            $script = $container->find('script', 0);
+            $script = $container->children (6);
             $datas = explode(';', $script->innertext);
             foreach ($datas as $data) {
                 if ($this->commonutils->startsWith($data, 'window.chapterPages')) {
-                    // log_message('info', $data);
+                    log_message('info', $data);
                     $dataImg = str_replace('window.chapterPages = ', '', $data);
                     $dataImgJson = json_decode($dataImg);
                     
                     $dataDB = array();
                     foreach($dataImgJson as $imgUrl) {
-                        // log_message('info', "Image URL: ".$imgUrl);
+                        log_message('info', "Image URL: ".$imgUrl);
                         //$content = $this->commonutils->curl_get_contents(ZEROSCANS_IMAGE_BASE_URL.$imgUrl, 300);
                         //$mimeType = $this->commonutils->getMimeTypes($imgUrl);
                         $filename = basename(parse_url($imgUrl, PHP_URL_PATH));
