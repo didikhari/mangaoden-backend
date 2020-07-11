@@ -62,7 +62,7 @@ $route['api/v1/comics/(:any)'] = 'ComicController/comicsDetail/$1';
 $route['api/v1/comics/(:any)/chapters'] = 'ChapterController/chapters/$1';
 $route['api/v1/comics/(:any)/chapters/(:any)'] = 'ChapterController/chapterDetail/$1/$2';
 
-/* zeroscans */
+/* crawl */
 $route['retriever/zeroscans/star-martial-god-technique'] = 'ZeroScansRetriever/manga/1';
 $route['retriever/zeroscans/second-life-ranker'] = 'ZeroScansRetriever/manga/2';
 $route['retriever/zeroscans/wind-sword'] = 'ZeroScansRetriever/manga/3';
@@ -77,3 +77,4 @@ $route['retriever/leviatanscans/legend-of-the-northern-blade'] = 'LeviatanscansR
 $route['retriever/earlymanga/murim-login'] = 'WPMangaRetriever/manga/12/3';
 $route['retriever/zeroscans/record-of-the-war-god'] = 'ZeroScansRetriever/manga/13';
 $route['retriever/skscans/mookhyang-dark-lady'] = 'AnyScansRetriever/manga/14';
+$route['retriever/skscans/the-great-mage-returns-after-4000-years'] = 'AnyScansRetriever/manga/15';
