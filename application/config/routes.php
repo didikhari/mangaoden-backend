@@ -77,4 +77,4 @@ $route['retriever/leviatanscans/legend-of-the-northern-blade'] = 'LeviatanscansR
 $route['retriever/earlymanga/murim-login'] = 'WPMangaRetriever/manga/12/3';
 $route['retriever/zeroscans/record-of-the-war-god'] = 'ZeroScansRetriever/manga/13';
 $route['retriever/skscans/mookhyang-dark-lady'] = 'AnyScansRetriever/manga/14';
-$route['retriever/skscans/the-great-mage-returns-after-4000-years'] = 'AnyScansRetriever/manga/15';
+$route['retriever/reaperscans/the-great-mage-returns-after-4000-years'] = 'AnyScansRetriever/manga/15';
