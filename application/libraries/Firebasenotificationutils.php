@@ -23,8 +23,8 @@
                     "chapter_id" => $chapterId,
                     "chapter_no" => $chapterNumber,
                     "chapter_title" => $body,
-                    "is_read": 0,
-                    "click_action": "FLUTTER_NOTIFICATION_CLICK"
+                    "is_read" => 0,
+                    "click_action" => "FLUTTER_NOTIFICATION_CLICK"
                     ),
                 'to' => 'eL0wiOyPTya5OR98-LtB4p:APA91bHKFdoLIsSmAZMMW4Zf-GlG7WukWNW7-TFG2d7b6bunNswb9VMzweBnj_9CN0LiQqkEZ5Nf9s2v6rJhP6UYQy3rmuBdDN_IfKT6VM8IKk64SJXwO79TGgfBXwZJL783Jku3YuPN',
             );
