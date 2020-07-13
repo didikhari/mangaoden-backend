@@ -54,7 +54,8 @@
                         $chapterId = $this->chapterDao->save($chapterDb);
     
                         $this->fetchChapterImage($chapterId, $chapter->href, 'images/'.$selectedManga['drive_folder_id'].'/'.$chapterNumber);
-                        $this->firebasenotificationutils->broadcash($selectedManga['title'].' Update', $chapterDb['number'].' : '.$chapterDb['title']);
+                        $this->firebasenotificationutils->broadcash($selectedManga['title'].' Update', $chapterDb['number'].' : '.$chapterDb['title'],
+                            $mangaId, $chapterId, $chapterNumber);
                         break;
                     }
 

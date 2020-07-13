@@ -3,7 +3,7 @@
 
     class Firebasenotificationutils {
 
-        public function broadcash ($title, $body) {
+        public function broadcash ($title, $body, $mangaId, $chapterId, $chapterNumber) {
             
             $requestHeader = array(
                 'Content-Type' => 'application/json', 
@@ -17,10 +17,16 @@
                     'click_action' => 'FLUTTER_NOTIFICATION_CLICK',
                     ),
                 'data' => array (
-                    'name' => 'Kanaya',
-                    'age' => 3,
+                    "action" => 1,
+                    "comic_id" => $mangaId,
+                    "title" => $title,
+                    "chapter_id" => $chapterId,
+                    "chapter_no" => $chapterNumber,
+                    "chapter_title" => $body,
+                    "is_read": 0,
+                    "click_action": "FLUTTER_NOTIFICATION_CLICK"
                     ),
-                'to' => 'fFEKY-hdRZ6vspBJY429oC:APA91bELxhuHgCE1Td1W8CcTFNjQj_Bd_LW-0olblmgz2zVZRRmuOM9nRxOrqM7AHRVdCBDTjhfnhsQ10wrZYa0t6emPq-l1_z49buGyRJZwCFc7_Qf1vp_UaLRBSCo59zwU931br-oi',
+                'to' => 'eL0wiOyPTya5OR98-LtB4p:APA91bHKFdoLIsSmAZMMW4Zf-GlG7WukWNW7-TFG2d7b6bunNswb9VMzweBnj_9CN0LiQqkEZ5Nf9s2v6rJhP6UYQy3rmuBdDN_IfKT6VM8IKk64SJXwO79TGgfBXwZJL783Jku3YuPN',
             );
 
             $response = Requests::post('https://fcm.googleapis.com/fcm/send', $requestHeader, json_encode($requestBody));
