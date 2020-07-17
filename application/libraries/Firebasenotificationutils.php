@@ -3,7 +3,7 @@
 
     class Firebasenotificationutils {
 
-        public function broadcash ($title, $body, $mangaId, $chapterId, $chapterNumber) {
+        public function broadcash ($title, $body, $mangaId, $chapterId, $chapterNumber, $coverImage) {
             
             $requestHeader = array(
                 'Content-Type' => 'application/json', 
@@ -24,9 +24,10 @@
                     "chapter_no" => $chapterNumber,
                     "chapter_title" => $body,
                     "is_read" => 0,
-                    "click_action" => "FLUTTER_NOTIFICATION_CLICK"
+                    "click_action" => "FLUTTER_NOTIFICATION_CLICK",
+                    "cover_image" => $coverImage
                     ),
-                'to' => 'eL0wiOyPTya5OR98-LtB4p:APA91bHKFdoLIsSmAZMMW4Zf-GlG7WukWNW7-TFG2d7b6bunNswb9VMzweBnj_9CN0LiQqkEZ5Nf9s2v6rJhP6UYQy3rmuBdDN_IfKT6VM8IKk64SJXwO79TGgfBXwZJL783Jku3YuPN',
+                'to' => 'fCcSwUPWSxqypH94Wl9-Lx:APA91bH7aV7OgzoZpDhh0lTjscNIAhO6iRAqj5P-pMrnHg2RHqV3wYES4dqJZHoRc6pzSFbrKH33roa4JBq6-pftqYkCp7PMBvVQ2i3rFfu-HOGDSBWCBs0cqk53lqQcFcZ3bjmXR91z',
             );
 
             $response = Requests::post('https://fcm.googleapis.com/fcm/send', $requestHeader, json_encode($requestBody));
