@@ -1,4 +1,5 @@
 <?php
+    require APPPATH . 'libraries/REST_Controller.php';
     require APPPATH . 'libraries/simple_html_dom.php';
 
     class ComicEaselRetriever extends REST_Controller {
