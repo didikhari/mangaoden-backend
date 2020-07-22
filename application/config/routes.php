@@ -79,3 +79,4 @@ $route['retriever/zeroscans/record-of-the-war-god'] = 'ZeroScansRetriever/manga/
 $route['retriever/skscans/mookhyang-dark-lady'] = 'AnyScansRetriever/manga/14';
 $route['retriever/reaperscans/the-great-mage-returns-after-4000-years'] = 'AnyScansRetriever/manga/15';
 $route['retriever/leviatanscans/chronicles-of-heavenly-demon'] = 'AnyScansRetriever/manga/16';
+$route['retriever/mobpsycho100-manga/mob-psycho-100'] = 'ComicEaselRetriever/manga/17/23';
