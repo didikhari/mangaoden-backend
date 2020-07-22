@@ -55,11 +55,12 @@
         private function fetchChapterImage($chapterId, $sourceUrl, $folder) {
             $html = file_get_html($sourceUrl);
             $readingContent = $html->find('div[class=entry-content]', 0);
-            
-            $contents = $readingContent->find('img');
+            $contentWrappers = $html->find('div[class=separator]');
             $dataDB = array();
             $filenameArray = array();
-            foreach($contents as $content){
+            foreach($contentWrappers as $contentWrapper){
+
+                $content = $contentWrapper->find('img', 0);
                 $imgUrl = trim($content->{'data-src'});
 
                 if ($this->commonutils->IsNullOrEmptyString($imgUrl)){
