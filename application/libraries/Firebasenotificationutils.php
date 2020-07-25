@@ -27,7 +27,7 @@
                     "click_action" => "FLUTTER_NOTIFICATION_CLICK",
                     "cover_image" => $coverImage
                     ),
-                'to' => 'ciOoX8RiRIu2ENVK0UW_Ha:APA91bEOsjFdVsCTq-xkYHmuRpRuLdiLfyvTliaM8iUOye0wybpdTPNfb_VY76RZSmJt3zivNRpZG7NuZUTowqPegraNjAYYvftRWnqRILE0VU7ckVUxFZDqWf3bISo3TgpI6R_g8bAh',
+                'to' => '/topics/'.$mangaId,
             );
 
             $response = Requests::post('https://fcm.googleapis.com/fcm/send', $requestHeader, json_encode($requestBody));
