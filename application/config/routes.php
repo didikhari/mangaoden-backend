@@ -81,3 +81,4 @@ $route['retriever/reaperscans/the-great-mage-returns-after-4000-years'] = 'AnySc
 $route['retriever/leviatanscans/chronicles-of-heavenly-demon'] = 'AnyScansRetriever/manga/16';
 $route['retriever/mobpsycho100-manga/mob-psycho-100'] = 'ComicEaselRetriever/manga/17/23';
 $route['retriever/kimetsu-noyaiba/demon-slayer'] = 'ComicEaselRetriever/manga/18/25';
+$route['retriever/boruto-naruto/boruto'] = 'ComicEaselRetriever/manga/19/15';
