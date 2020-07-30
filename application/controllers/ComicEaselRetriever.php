@@ -35,7 +35,11 @@
                     $chapterDb['source_chapter_url'] = $url;
 
                     $urlBaseName = basename(parse_url($url, PHP_URL_PATH));
-                    $chapterNumber = str_split($urlBaseName, $startChapterNumberIndex)[1];
+                    if(strlen($urlBasename) < $startChapterNumberIndex) {
+                        $chapterNumber = $urlBasename;
+                    } else {
+                        $chapterNumber = str_split($urlBaseName, $startChapterNumberIndex)[1];
+                    }
                     $chapterNumber = str_replace('-', '.', $chapterNumber);
                     $chapterDb['number'] = $chapterNumber;
                     
