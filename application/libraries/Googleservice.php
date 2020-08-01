@@ -15,7 +15,7 @@
                     'name' => '1',
                     'mimeType' => 'application/vnd.google-apps.folder',
                     'parents' => '1q-hrmGn4Y9XZClqXN0Rg1HUsJBqQVz0L'));
-                $folder = $service.files().create($fileMetadata, array(
+                $folder = $service->files->create($fileMetadata, array(
                     'fields' => 'id'));
                 // upload
                 $fileMetadata2 = new Google_Service_Drive_DriveFile(array(
