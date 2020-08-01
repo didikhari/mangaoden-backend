@@ -25,7 +25,8 @@
                 // upload file
                 $fileMetadata = new Google_Service_Drive_DriveFile(array(
                     'name' => '02.jpg',
-                    'parents' => array($folder->id));
+                    'parents' => array($folder->id)
+                ));
                 // // Set the parent folder.
                 // if ($folder != null) {
                 //     $parent = new Google_Service_Drive_ParentReference();
