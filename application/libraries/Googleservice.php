@@ -9,9 +9,23 @@
             $client->addScope(Google_Service_Drive::DRIVE_METADATA_READONLY);
             if (isset($_SESSION['access_token']) && $_SESSION['access_token']) {
                 $client->setAccessToken($_SESSION['access_token']);
-                $drive = new Google_Service_Drive($client);
-                $files = $drive->files->listFiles(array())->getFiles();
-                return json_encode($files);
+                $service = new Google_Service_Drive($client);
+                // create folder
+                $fileMetadata = new Google_Service_Drive_DriveFile(array(
+                    'name' => '1',
+                    'mimeType' => 'application/vnd.google-apps.folder',
+                    'parents' => '1q-hrmGn4Y9XZClqXN0Rg1HUsJBqQVz0L'));
+                $folder = $service.files().create($fileMetadata, array(
+                    'fields' => 'id'));
+                // upload
+                $fileMetadata2 = new Google_Service_Drive_DriveFile(array(
+                    'name' => '01.jpg'));
+                $file = $service->files->create($fileMetadata2, array(
+                    'data' => file_get_contents('images/star-martial-god-technique/1/01.jpg'),
+                    'mimeType' => 'image/jpg',
+                    'uploadType' => 'multipart',
+                    'fields' => 'id'));
+                return $file->id;
             } else {
                 $redirect_uri = 'https://crawl.didikhari.web.id/index.php/driveauth';
                 header('Location: ' . filter_var($redirect_uri, FILTER_SANITIZE_URL));
@@ -75,20 +89,22 @@
                 if ($client->getRefreshToken()) {
                     $client->fetchAccessTokenWithRefreshToken($client->getRefreshToken());
                 } else {
-                    // Request authorization from the user.
-                    $authUrl = $client->createAuthUrl();
-                    printf("Open the following link in your browser:\n%s\n", $authUrl);
-                    print 'Enter verification code: ';
-                    $authCode = trim(fgets(STDIN));
+                    // // Request authorization from the user.
+                    // $authUrl = $client->createAuthUrl();
+                    // printf("Open the following link in your browser:\n%s\n", $authUrl);
+                    // print 'Enter verification code: ';
+                    // $authCode = trim(fgets(STDIN));
 
-                    // Exchange authorization code for an access token.
-                    $accessToken = $client->fetchAccessTokenWithAuthCode($authCode);
-                    $client->setAccessToken($accessToken);
+                    // // Exchange authorization code for an access token.
+                    // $accessToken = $client->fetchAccessTokenWithAuthCode($authCode);
+                    // $client->setAccessToken($accessToken);
 
-                    // Check to see if there was an error.
-                    if (array_key_exists('error', $accessToken)) {
-                        throw new Exception(join(', ', $accessToken));
-                    }
+                    // // Check to see if there was an error.
+                    // if (array_key_exists('error', $accessToken)) {
+                    //     throw new Exception(join(', ', $accessToken));
+                    // }
+                    $redirect_uri = 'https://crawl.didikhari.web.id/index.php/driveauth';
+                    header('Location: ' . filter_var($redirect_uri, FILTER_SANITIZE_URL));
                 }
                 // Save the token to a file.
                 if (!file_exists(dirname($tokenPath))) {
