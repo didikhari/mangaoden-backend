@@ -13,22 +13,25 @@
                 // create folder
                 $folderMetadata = new Google_Service_Drive_DriveFile(array(
                     'name' => '1',
-                    'mimeType' => 'application/vnd.google-apps.folder'));
-                $rootFolder = new Google_Service_Drive_ParentReference();
-                $rootFolder->setId('1q-hrmGn4Y9XZClqXN0Rg1HUsJBqQVz0L');
-                $folderMetadata->setParents(array($rootFolder));
+                    'mimeType' => 'application/vnd.google-apps.folder',
+                    'parents' => array('1q-hrmGn4Y9XZClqXN0Rg1HUsJBqQVz0L')
+                ));
+                // $rootFolder = new Google_Service_Drive_ParentReference();
+                // $rootFolder->setId('1q-hrmGn4Y9XZClqXN0Rg1HUsJBqQVz0L');
+                // $folderMetadata->setParents(array($rootFolder));
                 $folder = $service->files->create($folderMetadata, array(
                     'fields' => 'id'));
 
                 // upload file
                 $fileMetadata = new Google_Service_Drive_DriveFile(array(
-                    'name' => '02.jpg'));
-                // Set the parent folder.
-                if ($folder != null) {
-                    $parent = new Google_Service_Drive_ParentReference();
-                    $parent->setId($folder->id);
-                    $fileMetadata->setParents(array($parent));
-                }
+                    'name' => '02.jpg',
+                    'parents' => array($folder->id));
+                // // Set the parent folder.
+                // if ($folder != null) {
+                //     $parent = new Google_Service_Drive_ParentReference();
+                //     $parent->setId($folder->id);
+                //     $fileMetadata->setParents(array($parent));
+                // }
 
                 $file = $service->files->create($fileMetadata, array(
                     'data' => file_get_contents('images/star-martial-god-technique/1/02.jpg'),
