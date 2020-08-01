@@ -10,7 +10,7 @@
 
         public function index_get(){
             //$this->google_utils->test();
-            log_message('info', $_SERVER['DOCUMENT_ROOT']);
+            log_message('info', file_exists('assets/client_secrets.json'));
             $this->googleservice->test();
             $this->response(array('status' => 'OK', 'message' => 'Success'));
         }
