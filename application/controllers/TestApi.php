@@ -5,7 +5,7 @@
 
         public function __construct() {
             parent::__construct();
-            $this->load->library('GoogleService');
+            $this->load->library('Googleservice');
         }
 
         public function index_get(){
