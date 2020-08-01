@@ -10,7 +10,7 @@
             if (isset($_SESSION['access_token']) && $_SESSION['access_token']) {
                 $client->setAccessToken($_SESSION['access_token']);
                 $drive = new Google_Service_Drive($client);
-                $files = $drive->files->listFiles(array())->getItems();
+                $files = $drive->files->listFiles(array())->getFiles();
                 return json_encode($files);
             } else {
                 $redirect_uri = 'https://crawl.didikhari.web.id/index.php/driveauth';
