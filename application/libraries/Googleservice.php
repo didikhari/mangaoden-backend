@@ -11,17 +11,27 @@
                 $client->setAccessToken($_SESSION['access_token']);
                 $service = new Google_Service_Drive($client);
                 // create folder
-                $fileMetadata = new Google_Service_Drive_DriveFile(array(
+                $folderMetadata = new Google_Service_Drive_DriveFile(array(
                     'name' => '1',
-                    'mimeType' => 'application/vnd.google-apps.folder',
-                    'parents' => '1q-hrmGn4Y9XZClqXN0Rg1HUsJBqQVz0L'));
-                $folder = $service->files->create($fileMetadata, array(
+                    'mimeType' => 'application/vnd.google-apps.folder'));
+                $rootFolder = new Google_Service_Drive_ParentReference();
+                $rootFolder->setId('1q-hrmGn4Y9XZClqXN0Rg1HUsJBqQVz0L');
+                $folderMetadata->setParents(array($rootFolder));
+                $folder = $service->files->create($folderMetadata, array(
                     'fields' => 'id'));
-                // upload
-                $fileMetadata2 = new Google_Service_Drive_DriveFile(array(
-                    'name' => '01.jpg'));
-                $file = $service->files->create($fileMetadata2, array(
-                    'data' => file_get_contents('images/star-martial-god-technique/1/01.jpg'),
+
+                // upload file
+                $fileMetadata = new Google_Service_Drive_DriveFile(array(
+                    'name' => '02.jpg'));
+                // Set the parent folder.
+                if ($folder != null) {
+                    $parent = new Google_Service_Drive_ParentReference();
+                    $parent->setId($folder->id);
+                    $fileMetadata->setParents(array($parent));
+                }
+
+                $file = $service->files->create($fileMetadata, array(
+                    'data' => file_get_contents('images/star-martial-god-technique/1/02.jpg'),
                     'mimeType' => 'image/jpg',
                     'uploadType' => 'multipart',
                     'fields' => 'id'));
