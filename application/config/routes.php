@@ -85,4 +85,3 @@ $route['retriever/boruto-naruto/boruto'] = 'ComicEaselRetriever/manga/19/15';
 $route['retriever/sololeveling-manga/sololeveling'] = 'ComicEaselRetriever/manga/20/22';
 $route['retriever/onimanga/sololeveling'] = 'OniMangaRetriever/manga/20';
 $route['retriever/onimanga/tensei-shitara-slime-datta-ken'] = 'OniMangaRetriever/manga/21';
-$route['retriever/onimanga/days'] = 'OniMangaRetriever/manga/22';
