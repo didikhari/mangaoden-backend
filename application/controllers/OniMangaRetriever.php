@@ -54,7 +54,7 @@
 
         private function fetchChapterImage($chapterId, $sourceUrl, $folder) {
             $html = file_get_html($sourceUrl);
-            $readingContent = $html->find('div[class=reader]', 0);
+            $readingContent = $html->find('div[class=center]', 0);
             $contents = $readingContent->find('img');
             $dataDB = array();
             $filenameArray = array();
