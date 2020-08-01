@@ -21,11 +21,12 @@
                 $client->authenticate($_GET['code']);
                 $_SESSION['access_token'] = $client->getAccessToken();
                 // Save the token to a file.
-                $tokenPath = 'token.json';
-                if (!file_exists(dirname($tokenPath))) {
-                    mkdir(dirname($tokenPath), 0700, true);
-                }
-                file_put_contents($tokenPath, json_encode($client->getAccessToken()));
+                // $tokenPath = 'token.json';
+                // if (!file_exists(dirname($tokenPath))) {
+                //     mkdir(dirname($tokenPath), 0700, true);
+                // }
+                // file_put_contents($tokenPath, json_encode($client->getAccessToken()));
+                $this->response(array('status' => 'OK', 'message' => 'Success'));
             }
         }
     }
