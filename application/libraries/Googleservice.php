@@ -4,18 +4,11 @@
     class Googleservice {
 
         public function test() {
-            $client = new Google_Client();
-            $client->setAuthConfig($_SERVER['DOCUMENT_ROOT'].'/assets/client_secret.json');
-            $client->addScope(Google_Service_Drive::DRIVE_METADATA_READONLY);
-            if (isset($_SESSION['access_token']) && $_SESSION['access_token']) {
-                $client->setAccessToken($_SESSION['access_token']);
-                $drive = new Google_Service_Drive($client);
-                $files = $drive->files->listFiles(array())->getItems();
-                echo json_encode($files);
-            } else {
-                $redirect_uri = 'https://crawl.didikhari.web.id/index.php/driveauth';
-                header('Location: ' . filter_var($redirect_uri, FILTER_SANITIZE_URL));
-            }
+            $client = $this->getClient();
+            
+            $drive = new Google_Service_Drive($client);
+            $files = $drive->files->listFiles(array())->getItems();
+            log_message('info', json_encode($files));
         }
 
         public function createSubFolder($parentFolderId, $folderName){
@@ -55,7 +48,7 @@
             $client = new Google_Client();
             $client->setApplicationName('Google Drive API PHP Quickstart');
             $client->setScopes(Google_Service_Drive::DRIVE_METADATA_READONLY);
-            $client->setAuthConfig('/home/ljxisdfg/crawl.didikhari.web.id/assets/credentials.json');
+            $client->setAuthConfig($_SERVER['DOCUMENT_ROOT'].'/assets/client_secret.json');
             $client->setAccessType('offline');
             $client->setPrompt('select_account consent');
 
