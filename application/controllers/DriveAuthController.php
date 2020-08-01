@@ -9,7 +9,7 @@
 
         public function driveauth_get(){
             $client = new Google_Client();
-            $client->setAuthConfigFile('/crawl.didikhari.web.id/assets/client_secret.json');
+            $client->setAuthConfigFile('https://crawl.didikhari.web.id/assets/client_secret.json');
             $client->setRedirectUri('https://crawl.didikhari.web.id/index.php/driveauth');
             $client->addScope(Google_Service_Drive::DRIVE_METADATA_READONLY);
 
