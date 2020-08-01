@@ -1,6 +1,7 @@
 <?php
+    require APPPATH . 'libraries/REST_Controller.php';
 
-    class DriveAuthController extends CI_Controller {
+    class DriveAuthController extends REST_Controller {
 
         public function __construct() {
             parent::__construct();
