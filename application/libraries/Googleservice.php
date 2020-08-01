@@ -5,7 +5,7 @@
 
         public function test() {
             $client = new Google_Client();
-            $client->setAuthConfig('.assets/client_secrets.json');
+            $client->setAuthConfig('/home/ljxisdfg/crawl.didikhari.web.id/assets/client_secrets.json');
             $client->addScope(Google_Service_Drive::DRIVE_METADATA_READONLY);
             if (isset($_SESSION['access_token']) && $_SESSION['access_token']) {
                 $client->setAccessToken($_SESSION['access_token']);
@@ -17,7 +17,7 @@
                 header('Location: ' . filter_var($redirect_uri, FILTER_SANITIZE_URL));
             }
         }
-        
+
         public function createSubFolder($parentFolderId, $folderName){
             log_message('info', 'creating sub folder');
             $client = $this->getClient();
