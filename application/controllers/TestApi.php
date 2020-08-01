@@ -1,8 +1,6 @@
 <?php
     require APPPATH . 'libraries/REST_Controller.php';
-    //require APPPATH . 'libraries/ImageKit/ImageKit.php';
-    use ImageKit\ImageKit;
-
+    
     class TestApi extends REST_Controller {
 
         public function __construct() {

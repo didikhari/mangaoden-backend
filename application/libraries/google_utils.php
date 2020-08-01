@@ -1,6 +1,7 @@
 <?php
     defined('BASEPATH') OR exit('No direct script access allowed');
-
+    use Google_Client;
+    
     class Google_utils {
 
         public function test() {
