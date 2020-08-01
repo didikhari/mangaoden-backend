@@ -5,10 +5,14 @@
 
         public function test() {
             $client = $this->getClient();
-            
-            $drive = new Google_Service_Drive($client);
-            $files = $drive->files->listFiles(array())->getItems();
-            log_message('info', json_encode($files));
+            $client->setAuthConfig($_SERVER['DOCUMENT_ROOT'].'/assets/client_secret.json');
+            $client->addScope(Google_Service_Drive::DRIVE_METADATA_READONLY);
+            if (isset($_SESSION['access_token']) && $_SESSION['access_token']) {
+                $client->setAccessToken($_SESSION['access_token']);
+            } else {
+                $redirect_uri = 'https://crawl.didikhari.web.id/index.php/driveauth';
+                header('Location: ' . filter_var($redirect_uri, FILTER_SANITIZE_URL));
+            }
         }
 
         public function createSubFolder($parentFolderId, $folderName){
