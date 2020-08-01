@@ -11,7 +11,7 @@
                 $client->setAccessToken($_SESSION['access_token']);
                 $drive = new Google_Service_Drive($client);
                 $files = $drive->files->listFiles(array())->getItems();
-                echo json_encode($files);
+                //echo json_encode($files);
             } else {
                 $redirect_uri = 'https://crawl.didikhari.web.id/index.php/driveauth';
                 header('Location: ' . filter_var($redirect_uri, FILTER_SANITIZE_URL));
