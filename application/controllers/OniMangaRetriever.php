@@ -31,7 +31,7 @@
                     );
                     $chapterDb['title'] = $title;
                     
-                    $url = trim($chapter->href);
+                    $url = 'https://onimanga.com'.trim($chapter->href);
                     $chapterDb['source_chapter_url'] = $url;
 
                     $urlBaseName = basename(parse_url($url, PHP_URL_PATH));
