@@ -17,11 +17,15 @@
                 $auth_url = $client->createAuthUrl();
                 header('Location: ' . filter_var($auth_url, FILTER_SANITIZE_URL));
             } else {
-                log_message('code', $_GET['code']);
+                log_message('info', $_GET['code']);
                 $client->authenticate($_GET['code']);
                 $_SESSION['access_token'] = $client->getAccessToken();
-                $redirect_uri = 'http://' . $_SERVER['HTTP_HOST'] . '/';
-                header('Location: ' . filter_var($redirect_uri, FILTER_SANITIZE_URL));
+                // Save the token to a file.
+                $tokenPath = 'token.json';
+                if (!file_exists(dirname($tokenPath))) {
+                    mkdir(dirname($tokenPath), 0700, true);
+                }
+                file_put_contents($tokenPath, json_encode($client->getAccessToken()));
             }
         }
     }

@@ -9,7 +9,8 @@
         }
 
         public function index_get(){
-            $this->googleservice->test();
+            $files = $this->googleservice->test();
+            log_message('info', $files);
             $this->response(array('status' => 'OK', 'message' => 'Success'));
         }
     }

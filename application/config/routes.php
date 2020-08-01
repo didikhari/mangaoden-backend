@@ -62,7 +62,7 @@ $route['api/v1/comics/(:any)'] = 'ComicController/comicsDetail/$1';
 $route['api/v1/comics/(:any)/chapters'] = 'ChapterController/chapters/$1';
 $route['api/v1/comics/(:any)/chapters/(:any)'] = 'ChapterController/chapterDetail/$1/$2';
 
-$route['driveauth'] = 'DriveAuthController/slider';
+$route['driveauth'] = 'DriveAuthController/driveauth';
 
 /* crawl */
 $route['retriever/zeroscans/star-martial-god-technique'] = 'ZeroScansRetriever/manga/1';
