@@ -10,6 +10,7 @@
 
         public function index_get(){
             //$this->google_utils->test();
+            log_message('info', $_SERVER['DOCUMENT_ROOT']);
             $this->googleservice->test();
             $this->response(array('status' => 'OK', 'message' => 'Success'));
         }

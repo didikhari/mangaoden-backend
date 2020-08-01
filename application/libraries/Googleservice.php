@@ -5,7 +5,7 @@
 
         public function test() {
             $client = new Google_Client();
-            $client->setAuthConfig('assets/client_secrets.json');
+            $client->setAuthConfig($_SERVER['DOCUMENT_ROOT'].'assets/client_secrets.json');
             $client->addScope(Google_Service_Drive::DRIVE_METADATA_READONLY);
             if (isset($_SESSION['access_token']) && $_SESSION['access_token']) {
                 $client->setAccessToken($_SESSION['access_token']);
