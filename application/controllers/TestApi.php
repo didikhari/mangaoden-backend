@@ -12,6 +12,7 @@
 
         public function index_get(){
             $this->google_utils->test();
+            $this->response(array('status' => 'OK', 'message' => 'Success'));
         }
     }
 ?>
