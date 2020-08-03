@@ -47,7 +47,8 @@
             $fileMetadata = new Google_Service_Drive_DriveFile(array(
                 'name' => $folderName,
                 'mimeType' => 'application/vnd.google-apps.folder',
-                'parents' => $parentFolderId));
+                'parents' => array($parentFolderId)
+            ));
             $folder = $service->files->create($fileMetadata, array(
                 'fields' => 'id'));
             return $folder->id;
