@@ -10,13 +10,18 @@
             $this->load->model('chapterDao');
             $this->load->model('chapterImageDao');
             $this->load->library('Commonutils');
-            $this->load->library('Imagekitutils');
+            $this->load->library('Googleservice');
             $this->load->library('Firebasenotificationutils');
         }
 
         public function manga_get($mangaId) {
             $selectedManga = $this->mangaDao->getDetailManga($mangaId);
-            //// log_message('info', 'Manga ID: '.$selectedManga);
+            if(is_null($selectedManga['gdrive_id'])) {
+                $folderId = $this->googleservice->createSubFolder('1IhvVBZoNErV-khr1oboaBQVcSjhz3wQH', $selectedManga['drive_folder_id']);
+                $selectedManga['gdrive_id'] = $folderId;
+                $this->mangaDao->updateManga($selectedManga);
+                log_message('info', $selectedManga['title'].' : '.$folderId);
+            }
             $html = file_get_html($selectedManga['source_manga_url']);
             
             $content = $html->find('div[id=content]', 0);
@@ -50,24 +55,28 @@
                         $chapterDb['source_chapter_url'] = $chapter->href;
         
                         $chapterDb['number'] = $chapterNumber;
+                        $chapterFolderId = $this->googleservice->createSubFolder($selectedManga['gdrive_id'] , $chapterNumber);
+                        $chapterDb['gdrive_id'] = $chapterFolderId;
                         $chapterId = $this->chapterDao->save($chapterDb);
     
-                        $this->fetchChapterImage($chapterId, $chapter->href, 'images/'.$selectedManga['drive_folder_id'].'/'.$chapterNumber);
+                        $this->fetchChapterImage($chapterId, $chapter->href, $chapterFolderId);
                         $this->firebasenotificationutils->broadcash($selectedManga['title'], $chapterDb['title'],
                             $mangaId, $chapterId, $chapterNumber, $selectedManga['cover_url']);
+
+                        $selectedManga['last_update_date'] = date("Y/m/m H:i:sa");
+                        $this->mangaDao->updateManga($selectedManga);
+
                         break;
                     }
 
                 }
             }
 
-            $selectedManga['last_update_date'] = date("Y/m/m H:i:sa");
-            $this->mangaDao->updateManga($selectedManga);
             // log_message('info', "Fetch Chapter Done");
             $this->response(array('status' => 'OK', 'message' => 'Success'));
         }
 
-        private function fetchChapterImage($chapterId, $sourceUrl, $folder) {
+        private function fetchChapterImage($chapterId, $sourceUrl, $folderId) {
             $html = file_get_html($sourceUrl);
             $content = $html->find('div[id=content]', 0);
             $container = $content->first_child();
@@ -86,21 +95,25 @@
                         //$mimeType = $this->commonutils->getMimeTypes($imgUrl);
                         $filename = basename(parse_url($imgUrl, PHP_URL_PATH));
                         //$this->commonutils->downloadImage($folder, $filename, LEVIATANSCANS_IMAGE_BASE_URL.$imgUrl, 300);
-                        $uploadedImage = $this->imagekitutils->upload(LEVIATANSCANS_IMAGE_BASE_URL.$imgUrl, $filename, $folder);
-                        if(isset($uploadedImage) && isset($uploadedImage->success) ) {
-                            $height = $uploadedImage->success->height;
-                            $width = $uploadedImage->success->width;
-                            $size = $uploadedImage->success->size;
-                            $imagekitUrl = $uploadedImage->success->url;
-                        }
+                        // $uploadedImage = $this->imagekitutils->upload(LEVIATANSCANS_IMAGE_BASE_URL.$imgUrl, $filename, $folder);
+                        // if(isset($uploadedImage) && isset($uploadedImage->success) ) {
+                        //     $height = $uploadedImage->success->height;
+                        //     $width = $uploadedImage->success->width;
+                        //     $size = $uploadedImage->success->size;
+                        //     $imagekitUrl = $uploadedImage->success->url;
+                        // }
+                        $fileId = $this->googleservice->upload($this->commonutils->url_get_contents(LEVIATANSCANS_IMAGE_BASE_URL.$imgUrl, 1200),
+                            $filename, $this->commonutils->getMimeTypes($imgUrl), $folderId);
+                        
                         array_push($dataDB, array(
                             'chapter_id' => $chapterId ,
                             'image_url' => $imgUrl ,
+                            'gdrive_id' => $fileId
                             //'drive_file_id' => $folder.'/'.$filename,
-                            'height' => isset($height) ? $height : null,
-                            'width' => isset($width) ? $width : null,
-                            'size' => isset($size) ? $size : null,
-                            'imagekit_url' => isset($imagekitUrl) ? $imagekitUrl : null
+                            // 'height' => isset($height) ? $height : null,
+                            // 'width' => isset($width) ? $width : null,
+                            // 'size' => isset($size) ? $size : null,
+                            // 'imagekit_url' => isset($imagekitUrl) ? $imagekitUrl : null
                             //'image_base64' => $this->commonutils->imageUrlToBase64(LEVIATANSCANS_IMAGE_BASE_URL.$imgUrl)
                             )
                         );
