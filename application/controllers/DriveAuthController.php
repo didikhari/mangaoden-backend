@@ -12,6 +12,8 @@
             $client->setAuthConfigFile($_SERVER['DOCUMENT_ROOT'].'/assets/client_secret.json');
             $client->setRedirectUri('https://crawl.didikhari.web.id/index.php/driveauth');
             $client->addScope(Google_Service_Drive::DRIVE);
+            $client->setAccessType('offline');
+            $client->setPrompt('select_account consent');
 
             if (! isset($_GET['code'])) {
                 $auth_url = $client->createAuthUrl();
