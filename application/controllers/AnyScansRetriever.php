@@ -18,8 +18,9 @@
         public function manga_get($mangaId) {
             $selectedManga = $this->mangaDao->getDetailManga($mangaId);
             if(is_null($selectedManga['gdrive_id'])) {
-                $folderId = $this->googleservice->createSubFolder(ROOT_GDRIVE_FOLDER, $selectedManga['drive_folder_id']);
+                $folderId = $this->googleservice->createSubFolder('1IhvVBZoNErV-khr1oboaBQVcSjhz3wQH', $selectedManga['drive_folder_id']);
                 $selectedManga['gdrive_id'] = $folderId;
+                $this->mangaDao->updateManga($selectedManga);
                 log_message('info', $selectedManga['title'].' : '.$folderId);
             }
             $source = $this->sourceDao->getById($selectedManga['source_id']);

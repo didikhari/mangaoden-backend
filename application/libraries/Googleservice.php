@@ -44,12 +44,12 @@
                 return null;
             }
             $service = new Google_Service_Drive($client);
-            $fileMetadata = new Google_Service_Drive_DriveFile(array(
+            $folderMetadata = new Google_Service_Drive_DriveFile(array(
                 'name' => $folderName,
                 'mimeType' => 'application/vnd.google-apps.folder',
                 'parents' => array($parentFolderId)
             ));
-            $folder = $service->files->create($fileMetadata, array(
+            $folder = $service->files->create($folderMetadata, array(
                 'fields' => 'id'));
             return $folder->id;
         }
