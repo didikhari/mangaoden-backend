@@ -102,7 +102,7 @@
                         //     $size = $uploadedImage->success->size;
                         //     $imagekitUrl = $uploadedImage->success->url;
                         // }
-                        $fileId = $this->googleservice->upload($this->commonutils->url_get_contents($imgUrl, 1200),
+                        $fileId = $this->googleservice->upload($this->commonutils->url_get_contents($mangaSourceBaseUrl.$imgUrl, 1200),
                             $filename, $this->commonutils->getMimeTypes($imgUrl), $folderId);
                             
                         array_push($dataDB, array(
