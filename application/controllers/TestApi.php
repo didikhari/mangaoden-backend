@@ -14,7 +14,7 @@
                 $this->response(array('status' => 'OK', 'message' => 'Failed'));
             } else {
                 foreach ($files as $file) {
-                    log_message('info', $file->getName(), $file->getId());
+                    log_message('info', $file->getName().'-'.$file->getId());
                 }
                 $this->response(array('status' => 'OK', 'message' => 'Success'));
             }
