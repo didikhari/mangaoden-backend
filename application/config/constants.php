@@ -107,3 +107,5 @@ defined('SOURCE_EARLYMANGA')    OR define('SOURCE_EARLYMANGA', '3');
 defined('LEVIATANSCANS_API_URL')    OR define('LEVIATANSCANS_API_URL', 'https://leviatanscans.com/');
 defined('LEVIATANSCANS_IMAGE_BASE_URL')    OR define('LEVIATANSCANS_IMAGE_BASE_URL', 'https://leviatanscans.com/');
 defined('SOURCE_LEVIATANSCANS')    OR define('SOURCE_LEVIATANSCANS', '2');
+
+defined('ROOT_GDRIVE_FOLDER') or define('ROOT_GDRIVE_FOLDER', '1IhvVBZoNErV-khr1oboaBQVcSjhz3wQH');

@@ -18,6 +18,20 @@
             return (substr($string, -$len) === $endString); 
         } 
 
+        public function url_get_contents($url, $timeout){
+            if (ini_get('allow_url_fopen')) {
+                $ctx = stream_context_create(array('http'=>
+                    array(
+                        'timeout' => $timeout,  //1200 Seconds is 20 Minutes
+                    )
+                ));
+                return file_get_contents($url, false, $ctx);
+
+            } else {
+                return curl_get_contents($url, $timeout);
+            }
+        }
+
         public function curl_get_contents($url, $timeout)
         {
             $ch = curl_init();

@@ -11,12 +11,17 @@
             $this->load->model('chapterImageDao');
             $this->load->model('sourceDao');
             $this->load->library('Commonutils');
-            $this->load->library('Imagekitutils');
+            $this->load->library('Googleservice');
             $this->load->library('Firebasenotificationutils');
         }
 
         public function manga_get($mangaId) {
             $selectedManga = $this->mangaDao->getDetailManga($mangaId);
+            if(is_null($selectedManga['gdrive_id'])) {
+                $folderId = $this->googleservice->createSubFolder(ROOT_GDRIVE_FOLDER, $selectedManga['drive_folder_id']);
+                $selectedManga['gdrive_id'] = $folderId;
+                log_message('info', $selectedManga['title'].' : '.$folderId);
+            }
             $source = $this->sourceDao->getById($selectedManga['source_id']);
             //// log_message('info', 'Manga ID: '.$selectedManga);
             $html = file_get_html($selectedManga['source_manga_url']);
@@ -46,6 +51,8 @@
                         $chapterDb = array(
                             "manga_id" => $mangaId
                         );
+                        $chapterFolderId = $this->googleservice->createSubFolder($selectedManga['gdrive_id'] , $chapterNumber);
+                        $chapterDb['gdrive_id'] = $chapterFolderId;
                         // log_message('info', 'Chapter: '. $chapter->innertext);
                         $chapterDb['title'] = trim($chapter->innertext);
         
@@ -69,7 +76,7 @@
             $this->response(array('status' => 'OK', 'message' => 'Success'));
         }
 
-        private function fetchChapterImage($chapterId, $sourceUrl, $folder, $mangaSourceBaseUrl) {
+        private function fetchChapterImage($chapterId, $sourceUrl, $folderId, $mangaSourceBaseUrl) {
             $html = file_get_html($sourceUrl);
             $content = $html->find('div[id=content]', 0);
             $container = $content->first_child();
@@ -88,21 +95,25 @@
                         //$mimeType = $this->commonutils->getMimeTypes($imgUrl);
                         $filename = basename(parse_url($imgUrl, PHP_URL_PATH));
                         //$this->commonutils->downloadImage($folder, $filename, ZEROSCANS_IMAGE_BASE_URL.$imgUrl, 300);
-                        $uploadedImage = $this->imagekitutils->upload($mangaSourceBaseUrl.$imgUrl, $filename, $folder);
-                        if( isset($uploadedImage) && isset($uploadedImage->success) ) {
-                            $height = $uploadedImage->success->height;
-                            $width = $uploadedImage->success->width;
-                            $size = $uploadedImage->success->size;
-                            $imagekitUrl = $uploadedImage->success->url;
-                        }
+                        // $uploadedImage = $this->imagekitutils->upload($mangaSourceBaseUrl.$imgUrl, $filename, $folder);
+                        // if( isset($uploadedImage) && isset($uploadedImage->success) ) {
+                        //     $height = $uploadedImage->success->height;
+                        //     $width = $uploadedImage->success->width;
+                        //     $size = $uploadedImage->success->size;
+                        //     $imagekitUrl = $uploadedImage->success->url;
+                        // }
+                        $fileId = $this->googleservice->upload($this->commonutils->url_get_contents($imgUrl, 1200),
+                            $filename, $this->commonutils->getMimeTypes($imgUrl), $folderId);
+                            
                         array_push($dataDB, array(
                             'chapter_id' => $chapterId ,
                             'image_url' => $imgUrl ,
+                            'gdrive_id' => $fileId
                             //'drive_file_id' => $folder.'/'.$filename,
-                            'height' => isset($height) ? $height : null,
-                            'width' => isset($width) ? $width : null,
-                            'size' => isset($size) ? $size : null,
-                            'imagekit_url' => isset($imagekitUrl) ? $imagekitUrl : null
+                            // 'height' => isset($height) ? $height : null,
+                            // 'width' => isset($width) ? $width : null,
+                            // 'size' => isset($size) ? $size : null,
+                            // 'imagekit_url' => isset($imagekitUrl) ? $imagekitUrl : null
                             //'image_base64' => $this->commonutils->imageUrlToBase64(ZEROSCANS_IMAGE_BASE_URL.$imgUrl)
                             )
                         );

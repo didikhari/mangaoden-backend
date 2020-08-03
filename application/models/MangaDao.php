@@ -82,7 +82,7 @@
         
         public function updateManga($manga) {
             $this->db->where('id', $manga['id']);
-            unset($manga['id']);
+            //unset($manga['id']);
             $this->db->update('manga', $manga);
         }
 
