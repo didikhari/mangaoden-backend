@@ -10,8 +10,13 @@
 
         public function index_get(){
             $files = $this->googleservice->list(1);
-            log_message('info', $files->id);
-            $this->response(array('status' => 'OK', 'message' => 'Success'));
+            if(is_null($files)) {
+                $this->response(array('status' => 'OK', 'message' => 'Failed'));
+            } else {
+                log_message('info', $files->id);
+                $this->response(array('status' => 'OK', 'message' => 'Success', 'file_id' => $files->id));
+            }
+            
         }
     }
 ?>

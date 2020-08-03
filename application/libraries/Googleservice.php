@@ -119,10 +119,13 @@
 
             // If there is no previous token or it's expired.
             if ($client->isAccessTokenExpired()) {
+                log_message('info', 'Access Token Expired');
                 // Refresh the token if possible, else fetch a new one.
                 if ($client->getRefreshToken()) {
+                    log_message('info', 'Refresh the token');
                     $client->fetchAccessTokenWithRefreshToken($client->getRefreshToken());
                 } else {
+                    log_message('info', 'ERROR: Need to Request authorization from the user');
                     // // Request authorization from the user.
                     // $authUrl = $client->createAuthUrl();
                     // printf("Open the following link in your browser:\n%s\n", $authUrl);
