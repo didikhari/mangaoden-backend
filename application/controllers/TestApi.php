@@ -13,8 +13,10 @@
             if(is_null($files)) {
                 $this->response(array('status' => 'OK', 'message' => 'Failed'));
             } else {
-                log_message('info', $files->id);
-                $this->response(array('status' => 'OK', 'message' => 'Success', 'file_id' => $files->id));
+                foreach ($files as $file) {
+                    log_message('info', $file->getName(), $file->getId());
+                }
+                $this->response(array('status' => 'OK', 'message' => 'Success'));
             }
             
         }
