@@ -4,10 +4,8 @@
     class Googleservice {
 
         public function test() {
-            $client = new Google_Client();
-            $client->setAuthConfig($_SERVER['DOCUMENT_ROOT'].'/assets/client_secret.json');
-            $client->addScope(Google_Service_Drive::DRIVE);
-            if (isset($_SESSION['access_token']) && $_SESSION['access_token']) {
+            $client = $this->getClient();
+            if (is_null($client)) {
                 $client->setAccessToken($_SESSION['access_token']);
                 $service = new Google_Service_Drive($client);
                 // create folder
@@ -29,9 +27,7 @@
                     'data' => file_get_contents('images/star-martial-god-technique/1/02.jpg'),
                     'mimeType' => 'image/jpg',
                     'uploadType' => 'multipart',
-                    'fields' => 'id',
-                    'fields' => 'imageMediaMetadata',
-                    'fields' => 'exportLinks'
+                    'fields' => 'id, webContentLink, mimeType'
                 ));
                 log_message('info', json_encode($file));
                 return $file->id;
