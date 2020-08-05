@@ -29,7 +29,10 @@
             for ($i=count($chapters); $i > 0; $i--) { 
                 $chapter = $chapters[$i-1];
                 $title = trim($chapter->innertext);
-                $chapterExist = $this->chapterDao->countMangaChapterByTitle($mangaId, $title);
+                $url = 'https://onimanga.com'.trim($chapter->href);
+                $urlBaseName = basename(parse_url($url, PHP_URL_PATH));
+                $chapterNumber = str_replace('-', '.', $urlBaseName);
+                $chapterExist = $this->chapterDao->countMangaChapter($mangaId, $chapterNumber);
 
                 if($chapterExist == 0) {
                     $chapterDb = array(
@@ -37,12 +40,8 @@
                     );
                     $chapterDb['title'] = $title;
                     
-                    $url = 'https://onimanga.com'.trim($chapter->href);
                     $chapterDb['source_chapter_url'] = $url;
 
-                    $urlBaseName = basename(parse_url($url, PHP_URL_PATH));
-                    
-                    $chapterNumber = str_replace('-', '.', $urlBaseName);
                     $chapterDb['number'] = $chapterNumber;
                     $chapterFolderId = $this->googleservice->createSubFolder($selectedManga['gdrive_id'] , $chapterNumber);
                     $chapterDb['gdrive_id'] = $chapterFolderId;
