@@ -47,11 +47,17 @@
             return $query->result();
         }
 
-        public function countMangaChapter($mangaId, $chapterNumber) {
+        public function countMangaChapter2($mangaId, $chapterNumber) {
             $array = array('manga_id' => $mangaId, 'number' => $chapterNumber);
             $this->db->where($array);
             $this->db->from('chapter');
             return $this->db->count_all_results();
+        }
+
+        public function countMangaChapter($mangaId, $chapterNumber) {
+            $query = $this->db->query('SELECT COUNT(*) FROM chapter WHERE manga_id = $mangaId AND CAST(number AS DECIMAL(5,3)) = $chapterNumber');
+            $result = $query->row_array();
+            return $result['COUNT(*)'];
         }
 
         public function countMangaChapterByTitle($mangaId, $title) {
