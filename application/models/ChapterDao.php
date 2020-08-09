@@ -55,7 +55,7 @@
         }
 
         public function countMangaChapter($mangaId, $chapterNumber) {
-            $query = $this->db->query('SELECT COUNT(*) FROM chapter WHERE manga_id = $mangaId AND CAST(number AS DECIMAL(5,3)) = $chapterNumber');
+            $query = $this->db->query('SELECT COUNT(*) FROM chapter WHERE manga_id = '.$mangaId.' AND CAST(number AS DECIMAL(5,3)) = '.$chapterNumber);
             $result = $query->row_array();
             return $result['COUNT(*)'];
         }
