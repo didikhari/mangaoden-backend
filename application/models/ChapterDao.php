@@ -54,11 +54,11 @@
         //     return $this->db->count_all_results();
         // }
 
-        public function countMangaChapter($mangaId, $chapterNumber, $decimalDigit) {
+        public function countMangaChapter($mangaId, $chapterNumber) {
             if(!ISSET($decimalDigit)){
                 $decimalDigit = 0;
             }
-            $query = $this->db->query('SELECT COUNT(*) FROM chapter WHERE manga_id = '.$mangaId.' AND CAST(number AS DECIMAL(5,'.$decimalDigit.')) = '.$chapterNumber);
+            $query = $this->db->query('SELECT COUNT(*) FROM chapter WHERE manga_id = '.$mangaId.' AND CAST(number AS DECIMAL) = CAST('.$chapterNumber.' AS DECIMAL)');
             $result = $query->row_array();
             return $result['COUNT(*)'];
         }
