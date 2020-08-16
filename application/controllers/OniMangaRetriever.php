@@ -33,6 +33,7 @@
                 $urlBaseName = basename(parse_url($url, PHP_URL_PATH));
                 $chapterNumber = str_replace('-', '.', $urlBaseName);
                 $chapterNumber = str_replace('v', '.', $chapterNumber);
+                $chapterNumber = $this->commonutils->getChapterNoFromTitile($chapterNumber);
                 $chapterExist = $this->chapterDao->countMangaChapter($mangaId, $chapterNumber);
 
                 if($chapterExist == 0) {
