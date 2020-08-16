@@ -89,3 +89,4 @@ $route['retriever/sololeveling-manga/sololeveling'] = 'ComicEaselRetriever/manga
 $route['retriever/onimanga/sololeveling'] = 'OniMangaRetriever/manga/20';
 $route['retriever/onimanga/tensei-shitara-slime-datta-ken'] = 'OniMangaRetriever/manga/21';
 $route['retriever/onimanga/kingdom'] = 'OniMangaRetriever/manga/22';
+$route['retriever/onimanga/one-piece'] = 'OniMangaRetriever/manga/23';
