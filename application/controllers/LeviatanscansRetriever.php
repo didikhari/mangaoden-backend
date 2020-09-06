@@ -64,6 +64,8 @@
                             $mangaId, $chapterId, $chapterNumber, $selectedManga['cover_url']);
 
                         $selectedManga['last_chapter_date'] = date("Y/m/d H:i:sa");
+                        $selectedManga['last_update_date'] = date("Y/m/d H:i:sa");
+                        $this->mangaDao->updateManga($selectedManga);
 
                         break;
                     }
@@ -71,8 +73,6 @@
                 }
             }
 
-            $selectedManga['last_update_date'] = date("Y/m/d H:i:sa");
-            $this->mangaDao->updateManga($selectedManga);
             // log_message('info', "Fetch Chapter Done");
             $this->response(array('status' => 'OK', 'message' => 'Success'));
         }
