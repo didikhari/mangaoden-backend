@@ -53,6 +53,9 @@
                     $this->fetchChapterImage($chapterId, $url, $chapterFolderId);
                     $this->firebasenotificationutils->broadcash($selectedManga['title'], $chapterDb['title'],
                         $mangaId, $chapterId, $chapterNumber, $selectedManga['cover_url']);
+                    
+                    $selectedManga['last_update_date'] = date("Y/m/m H:i:sa");
+                    $this->mangaDao->updateManga($selectedManga);
                     break;
                 }
                 
