@@ -57,13 +57,14 @@
                     $this->firebasenotificationutils->broadcash($selectedManga['title'], $chapterDb['title'],
                         $mangaId, $chapterId, $chapterNumber, $selectedManga['cover_url']);
 
-                    $selectedManga['last_update_date'] = date("Y/m/m H:i:sa");
-                    $this->mangaDao->updateManga($selectedManga);
+                    $selectedManga['last_chapter_date'] = date("Y/m/d H:i:sa");
                     break;
                 }
                 
             }
             
+            $selectedManga['last_update_date'] = date("Y/m/d H:i:sa");
+            $this->mangaDao->updateManga($selectedManga);
             $this->response(array('status' => 'OK', 'message' => 'Success'));
         }
 
