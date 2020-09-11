@@ -105,7 +105,7 @@
 
         public function getNotUploadedGDrive(){
             $query = $this->db->query('SELECT DISTINCT id, manga_id, `number` FROM chapter WHERE gdrive_id is null ORDER BY id ASC LIMIT 1');
-            $rows = $query->result();
+            $rows = $query->row_array();
             return $rows;
         }
 
