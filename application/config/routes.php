@@ -61,6 +61,7 @@ $route['api/v1/comics'] = 'ComicController/comics';
 $route['api/v1/comics/(:any)'] = 'ComicController/comicsDetail/$1';
 $route['api/v1/comics/(:any)/chapters'] = 'ChapterController/chapters/$1';
 $route['api/v1/comics/(:any)/chapters/(:any)'] = 'ChapterController/chapterDetail/$1/$2';
+$route['api/v1/upload-gdrive'] = 'Google_drive_uploader_api/index';
 
 $route['driveauth'] = 'DriveAuthController/driveauth';
 

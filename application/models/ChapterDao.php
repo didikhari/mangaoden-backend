@@ -102,5 +102,17 @@
             $query = $this->db->get_where('chapter', array('manga_id' => $mangaId, 'number > ' => $currentChapterNumber));
             return $query->row_array();
         }
+
+        public function getNotUploadedGDrive(){
+            $query = $this->db->query('SELECT DISTINCT id, manga_id, `number` FROM chapter WHERE gdrive_id is null ORDER BY id ASC LIMIT 1');
+            $rows = $query->result();
+            return $rows;
+        }
+
+        public function updateGDriveId($chapter) {
+            $this->db->set('gdrive_id', $chapter['gdrive_id']);
+            $this->db->where('id', $chapter['id']);
+            $this->db->update('chapter');
+        }
     }
 ?>

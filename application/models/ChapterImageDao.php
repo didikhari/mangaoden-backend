@@ -16,5 +16,11 @@
         public function saveBatch($data) {
              $this->db->insert_batch('chapter_image', $data);
         }
+
+        public function updateGdriveId($imageId, $fileId) {
+            $this->db->set('gdrive_id', $fileId);
+            $this->db->where('id', $imageId);
+            $this->db->update('chapter_image');
+        }
     }
 ?>
