@@ -94,3 +94,4 @@ $route['retriever/onimanga/kingdom'] = 'OniMangaRetriever/manga/22';
 $route['retriever/onimanga/one-piece'] = 'OniMangaRetriever/manga/23';
 $route['retriever/onimanga/gosu'] = 'OniMangaRetriever/manga/24';
 $route['retriever/leviatanscans/immortal-invicible'] = 'LeviatanscansRetriever/manga/25';
+$route['retriever/leviatanscans/i-am-the-sorcerer-king'] = 'LeviatanscansRetriever/manga/26';
