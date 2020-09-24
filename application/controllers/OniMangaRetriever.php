@@ -85,13 +85,13 @@
                     //     $size = $uploadedImage->success->size;
                     //     $imagekitUrl = $uploadedImage->success->url;
                     // }
-                    $fileId = $this->googleservice->upload($this->commonutils->url_get_contents($imgUrl, 1200),
-                        $filename, $this->commonutils->getMimeTypes($imgUrl), $folderId);
+                    // $fileId = $this->googleservice->upload($this->commonutils->url_get_contents($imgUrl, 1200),
+                    //     $filename, $this->commonutils->getMimeTypes($imgUrl), $folderId);
             
                     array_push($dataDB, array(
                         'chapter_id' => $chapterId ,
-                        'image_url' => $imgUrl ,
-                        'gdrive_id' => $fileId
+                        'image_url' => $imgUrl
+                        // 'gdrive_id' => $fileId
                         //'drive_file_id' => $folder.'/'.$filename,
                         // 'height' => isset($height) ? $height : null,
                         // 'width' => isset($width) ? $width : null,
