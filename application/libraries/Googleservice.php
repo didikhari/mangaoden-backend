@@ -19,16 +19,7 @@
                 //     'fields' => 'id'));
 
                 // upload file
-                $fileMetadata = new Google_Service_Drive_DriveFile(array(
-                    'name' => '02.jpg'
-                ));
-               
-                $file = $service->files->create($fileMetadata, array(
-                    'data' => file_get_contents('images/star-martial-god-technique/1/02.jpg'),
-                    'mimeType' => 'image/jpg',
-                    'uploadType' => 'multipart',
-                    'fields' => 'id, webContentLink, mimeType'
-                ));
+                $file = $this->list(100, '16v42vuk9MRsLF_5b6FLjPYxObA7-bsub');
                 log_message('info', json_encode($file));
                 return $file->id;
             } else {
@@ -72,7 +63,7 @@
             return $file->id;
         }
 
-        public function list($pageSize) {
+        public function list($pageSize, $parentGdriveId) {
             // Get the API client and construct the service object.
             $client = $this->getClient();
             if(is_null($client)) {
@@ -83,7 +74,8 @@
             // Print the names and IDs for up to $pageSize files.
             $optParams = array(
                 'pageSize' => $pageSize,
-                'fields' => 'nextPageToken, files(id, name)'
+                'fields' => 'nextPageToken, files(id, name)',
+                'q' => "'".$parentGdriveId."' in parents"
             );
             $results = $service->files->listFiles($optParams);
 
