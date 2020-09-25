@@ -56,8 +56,11 @@
                             $chapterLink = $chapter->find('a', 0);
                             $chapterReleaseDateWrapper = $chapter->find('span[class=chapter-release-date]', 0);
                             $chapterReleaseDate = $chapterReleaseDateWrapper->find('i', 0);
-                            $chapterNumber = trim($chapterLink->innertext);
-                            $chapterExist = $this->chapterDao->countMangaChapterByTitle($mangaId, $chapterNumber);
+                            $chapterTitle = trim($chapterLink->innertext);
+                            //$chapterExist = $this->chapterDao->countMangaChapterByTitle($mangaId, $chapterNumber);
+                            
+                            $chapterNumber = $this->commonutils->getChapterNoFromTitile($chapterTitle);
+                            $chapterExist = $this->chapterDao->countMangaChapter($mangaId, $chapterNumber);
                             // log_message('info', 'chapterExist '.$chapterExist);
 
                             if($chapterExist == 0) {
@@ -65,7 +68,7 @@
                                     "manga_id" => $mangaId
                                 );
                                 // log_message('info', 'Chapter: '. $chapter->innertext);
-                                $chapterDb['title'] = $chapterNumber;
+                                $chapterDb['title'] = $chapterTitle;
                 
                                 // log_message('info', 'Url: '. $chapter->href);
                                 $chapterDb['source_chapter_url'] = $chapterLink->href;
@@ -76,7 +79,7 @@
                                     $chapterDb['release_date'] = date("Y/m/d H:i:sa");
                                 }
                                 
-                                $chapterDb['number'] = $this->commonutils->getChapterNoFromTitile($chapterNumber);
+                                $chapterDb['number'] = $chapterNumber;
                                 $chapterFolderId = $this->googleservice->createSubFolder($selectedManga['gdrive_id'] , $chapterDb['number'] );
                                 $chapterDb['gdrive_id'] = $chapterFolderId;
                                 $chapterId = $this->chapterDao->save($chapterDb);
