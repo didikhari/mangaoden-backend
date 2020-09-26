@@ -6,6 +6,9 @@
         public function test() {
             $client = $this->getClient();
             if (is_null($client)) {
+                $redirect_uri = 'https://crawl.didikhari.web.id/index.php/driveauth';
+                header('Location: ' . filter_var($redirect_uri, FILTER_SANITIZE_URL));
+            } else {
                 $client->setAccessToken($_SESSION['access_token']);
                 $service = new Google_Service_Drive($client);
                 // create folder
@@ -22,9 +25,6 @@
                 $file = $this->list(100, '16v42vuk9MRsLF_5b6FLjPYxObA7-bsub');
                 log_message('info', json_encode($file));
                 return $file->id;
-            } else {
-                $redirect_uri = 'https://crawl.didikhari.web.id/index.php/driveauth';
-                header('Location: ' . filter_var($redirect_uri, FILTER_SANITIZE_URL));
             }
         }
 
