@@ -80,11 +80,11 @@
                                 }
                                 
                                 $chapterDb['number'] = $chapterNumber;
-                                $chapterFolderId = $this->googleservice->createSubFolder($selectedManga['gdrive_id'] , $chapterDb['number'] );
-                                $chapterDb['gdrive_id'] = $chapterFolderId;
+                                //$chapterFolderId = $this->googleservice->createSubFolder($selectedManga['gdrive_id'] , $chapterDb['number'] );
+                                //$chapterDb['gdrive_id'] = $chapterFolderId;
                                 $chapterId = $this->chapterDao->save($chapterDb);
             
-                                $this->fetchChapterImage($chapterId, $chapterLink->href, $chapterFolderId);
+                                $this->fetchChapterImage($chapterId, $chapterLink->href, null);
                                 $this->firebasenotificationutils->broadcash($selectedManga['title'], $chapterDb['title'],
                                     $mangaId, $chapterId, $chapterNumber, $selectedManga['cover_url']);
 
