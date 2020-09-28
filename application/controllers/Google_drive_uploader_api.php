@@ -29,28 +29,7 @@
             $this->chapterDao->updateGDriveId($chapter);
             log_message('info', $selectedManga['title'].'/'.$chapter['number'].' : '.$chapterFolderId);
 
-            $imageList = $this->chapterDao->getByChapterId($chapter['id']);
-            foreach($imageList as $chapterImage) {
-                if(!is_null($chapterImage->image_url) && !empty($chapterImage->image_url)) {
-                    
-                    $imageUrl = $chapterImage->imagekit_url;
-                    if(is_null($imageUrl) || empty($imageUrl)) {
-                        if(is_null($chapterImage->drive_file_id) || empty($chapterImage->drive_file_id)) {
-                            $imageUrl = $chapterImage->image_url;
-                            if(!$this->commonutils->startsWith($chapterImage->image_url, 'http')) {
-                                $imageUrl = $source['base_url'].$chapterImage->image_url;
-                            } 
-                        } else {
-                            $imageUrl = IMAGEKIT_ENDPOINT.'/'.$chapterImage->drive_file_id;
-                        }
-                    }
-                    $filename = basename(parse_url($imageUrl, PHP_URL_PATH));
-                    $fileId = $this->googleservice->upload($this->commonutils->url_get_contents($imageUrl, 1200),
-                            $filename, $this->commonutils->getMimeTypes($imageUrl), $chapterFolderId);
-                    $this->chapterImageDao->updateGdriveId($chapterImage->id, $fileId);    
-                }
-                
-            }
+            $this->upload_chapter_image($chapter, $source);
             $this->response(array('status' => 'OK', 'message' => 'Success'));
         }
 
@@ -86,7 +65,8 @@
         public function upload_chapter_image($chapter, $source){
             $imageList = $this->chapterDao->getByChapterId($chapter['id']);
             foreach($imageList as $chapterImage) {
-                if(!is_null($chapterImage->image_url) && !empty($chapterImage->image_url)) {
+                if(!is_null($chapterImage->image_url) && !empty($chapterImage->image_url) 
+                    && (is_null($chapterImage->gdrive_id) || empty($chapterImage->gdrive_id))) {
                     
                     $imageUrl = $chapterImage->imagekit_url;
                     if(is_null($imageUrl) || empty($imageUrl)) {
