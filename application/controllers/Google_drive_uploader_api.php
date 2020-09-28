@@ -70,8 +70,8 @@
             } else {
                 log_message('info', 'Listing Folder '.$chapter['number'].' : ');
                 $folders = $this->googleservice->list(5, $selectedManga['gdrive_id'], $chapter['number']);
-                if(length($folders) > 1){
-                    for ($i=0; $i < length($folders); $i++) { 
+                if(count($folders) > 1){
+                    for ($i=0; $i < count($folders); $i++) { 
                         $folder = $folders[i];
                         if($chapter['gdrive_id'] != $folder->id) {
                             $this->googleservice->delete($folder->id);
