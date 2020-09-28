@@ -63,7 +63,7 @@
             return $file->id;
         }
 
-        public function list($pageSize, $parentGdriveId) {
+        public function list($pageSize, $parentGdriveId, $folderName) {
             // Get the API client and construct the service object.
             $client = $this->getClient();
             if(is_null($client)) {
@@ -71,11 +71,15 @@
             }
             $service = new Google_Service_Drive($client);
 
+            $q = "'".$parentGdriveId."' in parents";
+            if(!is_null($folderName)) {
+                $q = $q." and name = '".$folderName."'";
+            }
             // Print the names and IDs for up to $pageSize files.
             $optParams = array(
                 'pageSize' => $pageSize,
                 'fields' => 'nextPageToken, files(id, name)',
-                'q' => "'".$parentGdriveId."' in parents"
+                'q' => $q
             );
             $results = $service->files->listFiles($optParams);
 
@@ -84,6 +88,15 @@
             } else {
                 return $results->getFiles();
             }
+        }
+
+        public function delete($gdriveId){
+            $client = $this->getClient();
+            if(is_null($client)) {
+                return null;
+            }
+            $service = new Google_Service_Drive($client);
+            $service->files->delete($gdriveId);
         }
 
         /**

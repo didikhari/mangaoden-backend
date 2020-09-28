@@ -22,5 +22,11 @@
             $this->db->where('id', $imageId);
             $this->db->update('chapter_image');
         }
+
+        public function getUnUploadedChapterId($mangaId) {
+            $query = $this->db->query('SELECT MIN(chapter_id) as min_chapter_id FROM `chapter_image` WHERE gdrive_id is null and chapter_id in (select id from chapter where manga_id = '.$mangaId.') ');
+            return $query->row_array();
+        }
+
     }
 ?>

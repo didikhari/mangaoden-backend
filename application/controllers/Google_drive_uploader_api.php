@@ -53,5 +53,58 @@
             }
             $this->response(array('status' => 'OK', 'message' => 'Success'));
         }
+
+        public function reverse_get($mangaId) {
+            $selectedManga = $this->mangaDao->getDetailManga($mangaId);
+            $source = $this->sourceDao->getById($selectedManga['source_id']);
+            $result = $this->chapterImageDao->getUnUploadedChapterId($mangaId);
+            $minChapterId = $result['min_chapter_id'];
+
+            $chapter = $this->chapterDao->getChapterById($minChapterId);
+            if(is_null($chapter['gdrive_id'])) {
+                $chapterFolderId = $this->googleservice->createSubFolder($selectedManga['gdrive_id'], $chapter['number']);
+                $chapter['gdrive_id'] = $chapterFolderId;
+                $this->chapterDao->updateGDriveId($chapter);
+                log_message('info', $selectedManga['title'].'/'.$chapter['number'].' : '.$chapterFolderId);
+                $this->upload_chapter_image($chapter, $source);
+            } else {
+                $folders = $this->googleservice->list(5, $selectedManga['gdrive_id'], $chapter['number']);
+                if(length($folders) > 1){
+                    for ($i=0; $i < length($folders); $i++) { 
+                        $folder = $folders[i];
+                        if($chapter['gdrive_id'] != $folder->id) {
+                            $this->googleservice->delete($folder->id);
+                        }
+                    }
+                } 
+                $this->upload_chapter_image($chapter, $source);
+            }
+            $this->response(array('status' => 'OK', 'message' => 'Success'));
+        }
+
+        public function upload_chapter_image($chapter, $source){
+            $imageList = $this->chapterDao->getByChapterId($chapter['id']);
+            foreach($imageList as $chapterImage) {
+                if(!is_null($chapterImage->image_url) && !empty($chapterImage->image_url)) {
+                    
+                    $imageUrl = $chapterImage->imagekit_url;
+                    if(is_null($imageUrl) || empty($imageUrl)) {
+                        if(is_null($chapterImage->drive_file_id) || empty($chapterImage->drive_file_id)) {
+                            $imageUrl = $chapterImage->image_url;
+                            if(!$this->commonutils->startsWith($chapterImage->image_url, 'http')) {
+                                $imageUrl = $source['base_url'].$chapterImage->image_url;
+                            } 
+                        } else {
+                            $imageUrl = IMAGEKIT_ENDPOINT.'/'.$chapterImage->drive_file_id;
+                        }
+                    }
+                    $filename = basename(parse_url($imageUrl, PHP_URL_PATH));
+                    $fileId = $this->googleservice->upload($this->commonutils->url_get_contents($imageUrl, 1200),
+                            $filename, $this->commonutils->getMimeTypes($imageUrl), $chapter['gdrive_id']);
+                    $this->chapterImageDao->updateGdriveId($chapterImage->id, $fileId);    
+                }
+                
+            }
+        }
     }
 ?>

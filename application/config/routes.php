@@ -63,6 +63,8 @@ $route['api/v1/comics/(:any)/chapters'] = 'ChapterController/chapters/$1';
 $route['api/v1/comics/(:any)/chapters/(:any)'] = 'ChapterController/chapterDetail/$1/$2';
 $route['api/v1/upload-gdrive'] = 'Google_drive_uploader_api/index';
 
+$route['api/v1/reverse-upload-gdrive/gosu'] = 'Google_drive_uploader_api/reverse/24';
+
 $route['driveauth'] = 'DriveAuthController/driveauth';
 
 /* crawl */
