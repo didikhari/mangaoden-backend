@@ -68,6 +68,7 @@
                 log_message('info', $selectedManga['title'].'/'.$chapter['number'].' : '.$chapterFolderId);
                 $this->upload_chapter_image($chapter, $source);
             } else {
+                log_message('info', 'Listing Folder '.$chapter['number'].' : ');
                 $folders = $this->googleservice->list(5, $selectedManga['gdrive_id'], $chapter['number']);
                 if(length($folders) > 1){
                     for ($i=0; $i < length($folders); $i++) { 

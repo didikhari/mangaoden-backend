@@ -83,6 +83,7 @@
             );
             $results = $service->files->listFiles($optParams);
 
+            log_message('info', json_encode($results));
             if (count($results->getFiles()) == 0) {
                 return null;
             } else {
