@@ -37,27 +37,29 @@
             $selectedManga = $this->mangaDao->getDetailManga($mangaId);
             $source = $this->sourceDao->getById($selectedManga['source_id']);
             $result = $this->chapterImageDao->getUnUploadedChapterId($mangaId);
-            $minChapterId = $result['min_chapter_id'];
+            if(!is_null($result)) {
+                $minChapterId = $result['min_chapter_id'];
 
-            $chapter = $this->chapterDao->getChapterById($minChapterId);
-            if(is_null($chapter['gdrive_id'])) {
-                $chapterFolderId = $this->googleservice->createSubFolder($selectedManga['gdrive_id'], $chapter['number']);
-                $chapter['gdrive_id'] = $chapterFolderId;
-                $this->chapterDao->updateGDriveId($chapter);
-                log_message('info', $selectedManga['title'].'/'.$chapter['number'].' : '.$chapterFolderId);
-                $this->upload_chapter_image($chapter, $source);
-            } else {
-                log_message('info', 'Listing Folder '.$chapter['number'].' : ');
-                $folders = $this->googleservice->list(5, $selectedManga['gdrive_id'], $chapter['number']);
-                if(count($folders) > 1){
-                    for ($i=0; $i < count($folders); $i++) { 
-                        $folder = $folders[$i];
-                        if($chapter['gdrive_id'] != $folder->id) {
-                            $this->googleservice->delete($folder->id);
+                $chapter = $this->chapterDao->getChapterById($minChapterId);
+                if(is_null($chapter['gdrive_id'])) {
+                    $chapterFolderId = $this->googleservice->createSubFolder($selectedManga['gdrive_id'], $chapter['number']);
+                    $chapter['gdrive_id'] = $chapterFolderId;
+                    $this->chapterDao->updateGDriveId($chapter);
+                    log_message('info', $selectedManga['title'].'/'.$chapter['number'].' : '.$chapterFolderId);
+                    $this->upload_chapter_image($chapter, $source);
+                } else {
+                    log_message('info', 'Listing Folder '.$chapter['number'].' : ');
+                    $folders = $this->googleservice->list(5, $selectedManga['gdrive_id'], $chapter['number']);
+                    if(count($folders) > 1){
+                        for ($i=0; $i < count($folders); $i++) { 
+                            $folder = $folders[$i];
+                            if($chapter['gdrive_id'] != $folder->id) {
+                                $this->googleservice->delete($folder->id);
+                            }
                         }
-                    }
-                } 
-                $this->upload_chapter_image($chapter, $source);
+                    } 
+                    $this->upload_chapter_image($chapter, $source);
+                }
             }
             $this->response(array('status' => 'OK', 'message' => 'Success'));
         }
