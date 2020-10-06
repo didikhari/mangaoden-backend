@@ -37,9 +37,8 @@
             $selectedManga = $this->mangaDao->getDetailManga($mangaId);
             $source = $this->sourceDao->getById($selectedManga['source_id']);
             $result = $this->chapterImageDao->getUnUploadedChapterId($mangaId);
-            if(!is_null($result)) {
-                $minChapterId = $result['min_chapter_id'];
-
+            $minChapterId = $result['min_chapter_id'];
+            if(!is_null($minChapterId)) {
                 $chapter = $this->chapterDao->getChapterById($minChapterId);
                 if(is_null($chapter['gdrive_id'])) {
                     $chapterFolderId = $this->googleservice->createSubFolder($selectedManga['gdrive_id'], $chapter['number']);
